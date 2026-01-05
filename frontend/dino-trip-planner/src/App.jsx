@@ -4,7 +4,8 @@ import './App.css';
 
 function App() {
   return (
-    <div className="app-container">
+    
+    <div className="app-container" >
       <NavigationBar />
       <main className="main-content">
         <Outlet />
