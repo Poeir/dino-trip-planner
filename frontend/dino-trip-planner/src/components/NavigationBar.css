@@ -1,0 +1,62 @@
+.bottom-navigation {
+    height: 64px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 16px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+/* Left & Right: ขนาดเท่ากัน */
+.nav-side {
+    width: 40px;                 /* 🔥 หัวใจของแนวคิดนี้ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Logo */
+.nav-icon {
+    font-size: 28px;
+}
+
+/* Title กลางจริง */
+.nav-title {
+    flex: 1;                     /* กินพื้นที่ที่เหลือ */
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Hamburger */
+.nav-menu {
+    font-size: 24px;
+}
+
+@media (max-width: 768px) {
+    .bottom-navigation {
+        height: 56px;
+    }
+
+    .nav-title {
+        font-size: 16px;
+    }
+    .nav-menu{
+        font-size: 16px;
+    }
+}
