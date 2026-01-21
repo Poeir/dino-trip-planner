@@ -3,18 +3,14 @@ import './NavigationBar.css';
 
 function NavigationBar() {
     return (
+        // Bottom Navigation Bar
         <nav className="bottom-navigation">
-            {/* Left */}
             <NavLink to="/" className="nav-side nav-left">
                 <span className="nav-icon">🦖</span>
             </NavLink>
-
-            {/* Center */}
             <div className="nav-title">
                 ไดโน
             </div>
-
-            {/* Right */}
             <button className="nav-side nav-menu">
                 ☰
             </button>
