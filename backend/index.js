@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require('express');
 const morgan = require('morgan');
 const connectDB = require('./config/db'); // Import เข้ามา
+const cors = require('cors');
 
 // Route Imports
 const searchPlaceRoutes = require("./routes/google_search_route");
@@ -11,6 +12,9 @@ const getAllPlacesRoute = require("./routes/place-routes/get-all-places");
 
 const app = express();
 
+app.use(cors({
+  origin: "http://localhost:5173",
+}));
 // Middleware
 app.use(morgan('dev'));
 app.use(express.json()); 
