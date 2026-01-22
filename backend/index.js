@@ -5,10 +5,12 @@ const connectDB = require('./config/db'); // Import เข้ามา
 const cors = require('cors');
 
 // Route Imports
-const searchPlaceRoutes = require("./routes/google_search_route");
-const databaseTestRoutes = require("./routes/test_database_connection");
-const placeRoute = require("./routes/place_detail_route");
+const searchPlaceRoutes = require("./routes/google-api-routes/google_search_route");
+const databaseTestRoutes = require("./routes/health/test_database_connection");
+const placeRoute = require("./routes/place-routes/add-place-by-id");
 const getAllPlacesRoute = require("./routes/place-routes/get-all-places");
+const googleDetailRoute = require("./routes/google-api-routes/google_detail_route");
+const getPhotoRoute = require("./routes/utils/photo-path-route");
 
 const app = express();
 
@@ -22,6 +24,8 @@ app.use(express.json());
 // Routes
 app.get('/', (req, res) => res.send("Dino Trip Planner API"));
 app.use("/api/google", searchPlaceRoutes);
+app.use("/api/google", googleDetailRoute);
+app.use('/api/google', getPhotoRoute);
 app.use("/api/places", placeRoute);
 app.use("/api/places", getAllPlacesRoute);
 app.use("/api/database", databaseTestRoutes);
