@@ -49,7 +49,7 @@ function PlaceCard({ place }) {
       className="place-card"
       onMouseEnter={startSlide}
       onMouseLeave={stopSlide}
-      onClick={() => navigate(`/place/${place._id}`)}
+      onClick={() => navigate(`/place/${place.google_place_id}`)}
       style={{ cursor: 'pointer' }}
     >
       <div className="place-image fancy">
