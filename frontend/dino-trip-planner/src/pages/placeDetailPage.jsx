@@ -1,99 +1,79 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
+import { useParams } from "react-router-dom"; // ถอด comment ออก
+import { useEffect } from "react"; // เพิ่ม useEffect
+import { get_one_place } from "../api/get-one-place"; // เพิ่ม import ฟังก์ชัน API
 // Mock data
-const mockPlaceData = {
-  core: {
-    location: {
-      lat: 16.4349499,
-      lng: 102.80249049999999
-    },
-    name: "Bueng Nong Khot",
-    primaryType: "state_park",
-    types: [
-      "state_park",
-      "tourist_attraction",
-      "park",
-      "point_of_interest",
-      "establishment"
-    ],
-    rating: 4.6,
-    userRatingCount: 179,
-    businessStatus: "OPERATIONAL"
-  },
-  address: {
-    formatted: "00001 Tambon Ban Pet, Amphoe Mueang Khon Kaen, Chang Wat Khon Kaen 40000, Thailand"
-  },
-  openingHours: null,
-  media: {
-    photos: [
-      {
-        name: "places/ChIJ89dnBcVhIjERyDBrxGmmz_0/photos/AcnlKN2Cjvf-NKAvt6lbRmA9SDSI0Jo7lDGv7Sc6OM0ju00sjnrlm77PGU0LGHJEg082vnZvmSBffFSLwiSpuP8KCE7pje4KpZpJOVZQoR5q8osE36xucdO4_CsoLMlDV4vm_1aS893RxccOr8izrkIgrSqkh0q5ph9_V8ZjHvonm1mFBeh-3EvJywT7-6X6LMltJ7IZmKz61iWD-D0UoOpDeYXZQWKLT9M3gE-uHXlnnUOI0oeGVv8svwh2077m2szW5YmQRLdeMZhd5ng_-040ontpskJ-QoGb767Wpia1RSHp1uDy_OKfvT_ZMZ5WZyPn21lBIg-cI11L2Pl9vOfhP-0nXh9iEUEhiZrbqEfPpgrU6MUl9pKhkchTgneemP18ExMRqK6O7wJivtFuOoTiWssxjmHbDIfAJmKpP4wtApU",
-        width: 4032,
-        height: 3024
-      },
-      {
-        name: "places/ChIJ89dnBcVhIjERyDBrxGmmz_0/photos/AcnlKN1ViuAzgTa3kLnYHJQvQLMw7J6X1frcyIUO9jmVOJ3_vuIUEGVN6mMWKuoeO2auuu0GsJMTUIxhuPeeJsM4aasqEdiwF7UTHp2QWBCX7YYuX5-64DUqEXmuJqhNXEpdQZjmrKeByYCVKdUGD96gcLqN_8kIT2RoGFpkvHiS8eyOzfPVWpdQbKhoIrWX0gbC6HHPUn5XKcVPxZeVPI7HUsHQ_IjSnW_gA_z1wRFct8M-DLcZ5_v1ecwjoUUMOm8MiBYXDLGd6WcfWprqcS0i97eOT9FtJZwpItiQwFYHkri4w5AT8fLNE7NPtJXmFhAmR-n2c9em92Cyfg2NqqopIVKVqb8NQ-YZ3F2eryz8ih2FVhG7UceoOXNlOmFe7k8w1TkNKtoWPrTpo7-G_ROrCkGmm-dqqRvayMsQs_6-uTo4dW8d",
-        width: 4800,
-        height: 3600
-      },
-      {
-        name: "places/ChIJ89dnBcVhIjERyDBrxGmmz_0/photos/AcnlKN2GG2avfg6BGaVHUjvwiy8P8-4GsCQ2h3LM-1Adm6hIntEuIAuZ4uS7Fh_UDhDliZ3jIOQIXMxX5CJfKLh653D_uqIOFQDM9dikPL9m_y0x2Kn23gk-EkA7km_7ohfr80E-YN1xBnK78HzOPkLIf4zocevrkk3uOp3JDODNJq4-7pF5xkQiiuynUvaVpN3wcYJqfxGs88z2Pwzt4-4d5QGu9aFVAXBr2Uw2SjAuWBuSKEt9-eUDRZaoBplsjs9uqDQn7CQJV8z49AfJfggAUiIMlS5g8btIonQEAUTlXmGHlb3gBYRIvgvB7hXzLSag547cvA1Z9BoP9N-Jub98YPIy1sUejz9hFt5OxOJfFIvc_coma0KZfqMYqjyZ2qR6jxRK15lafWAwzj1Z9VnYepwliDn4i53ecrY6M6dgz1E",
-        width: 3024,
-        height: 4032
-      },
-      {
-        name: "places/ChIJ89dnBcVhIjERyDBrxGmmz_0/photos/AcnlKN2Whfb95wtuGWOHgmBJlNj8_JPfq4LQc-RVPaSX87uC2N4Jziquq0uevaJU592raoTbZ1vakhEfx0PKVhKbyqH6XkHNHvJ8bpVoVg2-NQRWj2DTEWqEpJiuVWb2exfiQNdyFms57rV7LTSdFyVTKNUFY8RdiKQl7fded6J77EfkOO-gW72oy9zXsKejoTONXekW6fcqmcYJbTzzzUtTAzON8r6OqQi0rMl87PmKmOOB6jYFPv4wgwUokiFAacXcbJdGW2pp8DGnlRHPi5uWDv0x-dNFA_CBl8z7XCN3UDPuIZC4_wFQKQCpfD7nxT_a4PiyDW84Dp43FelgDcAQcAahcAx6WSS2H8QNT1WHmQfO_P0DF54H8G9Nq_1zk00iiMDUkAi2p-GOsdyRHLDYtgTaf0wXnSxWVp-ccVifDphi834GRi5XaeLbDRuLCRow",
-        width: 1600,
-        height: 1200
-      }
-    ]
-  },
-  reviews: [
-    {
-      authorName: "rodger ramjet",
-      rating: 5,
-      text: "Very Clean room and grounds, free coffee and tea, beautiful pool will stay again A+",
-      publishTime: "2025-08-18T03:18:27.796Z"
-    },
-    {
-      authorName: "Michelle",
-      rating: 3,
-      text: "Wow.... need to be maintenance. Diry smelly..",
-      publishTime: "2025-07-02T08:23:55.025Z"
-    },
-    {
-      authorName: "Tom Price",
-      rating: 5,
-      text: "A beautiful lake with an adjoined park and some long walking/cycling routes. There is exercise equipment here available to use too.",
-      publishTime: "2024-08-20T17:46:33.790Z"
-    },
-    {
-      authorName: "Andrasch Neunert",
-      rating: 5,
-      text: "A nice place, locals like to sit there to enjoy sunset views, having picknicks or watching fishermen. Romantic.",
-      publishTime: "2024-10-31T12:03:43.401Z"
-    },
-    {
-      authorName: "Laila x",
-      rating: 5,
-      text: "A good place in the community to chill and visit. Surrounded by street food markets.",
-      publishTime: "2025-04-17T13:39:32.612Z"
-    }
-  ]
-};
 
 function PlaceDetailPage() {
-//   const { id } = useParams();
-  const navigate = useNavigate();
+  const { id } = useParams(); // ถอด comment ออก - ดึง placeId จาก URL
+  const [place, setPlace] = useState(null); // เปลี่ยนจาก mockPlaceData เป็น state
+  const [loading, setLoading] = useState(true); // สำหรับแสดง loading state
+  const [error, setError] = useState(null); // สำหรับจัดการ error
   const [selectedImage, setSelectedImage] = useState(0);
-  
-  const place = mockPlaceData; // ใน production จะ fetch ด้วย id
+  const navigate = useNavigate(); // 👈 ต้องมีบรรทัดนี้
+  // API call to fetch place data
+  useEffect(() => {
+    const fetchPlaceData = async () => {
+      try{
+        setLoading(true);
+        setError(null);
+        const response = await get_one_place(id);
+       setPlace(response.data.data);
+      }catch(err){
+        setError(err.message || "เกิดข้อผิดพลาดในการโหลดข้อมูลสถานที่");
+      }finally{
+        setLoading(false);
+      }
+
+    }
+      if(id){
+        fetchPlaceData  ();
+      }
+  },[id]);
+
+    // แสดง loading spinner
+    if (loading) {
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-green-500 mx-auto mb-4"></div>
+            <p className="text-gray-600 text-lg">กำลังโหลดข้อมูล...</p>
+          </div>
+        </div>
+      );
+    }
+  // แสดง error message
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center max-w-md mx-auto p-6">
+          <div className="text-red-500 text-6xl mb-4">⚠️</div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">เกิดข้อผิดพลาด</h2>
+          <p className="text-gray-600 mb-4">{error}</p>
+          <button
+            onClick={() => navigate(-1)}
+            className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg"
+          >
+            กลับ
+          </button>
+        </div>
+      </div>
+    );
+  }
+  // ถ้าไม่มีข้อมูล
+  if (!place) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <p className="text-gray-600">ไม่พบข้อมูลสถานที่</p>
+      </div>
+    );
+  }
   const { core, address, media, reviews } = place;
   const photos = media?.photos ?? [];
 
   const getPhotoUrl = (name) =>
-    `http://localhost:3000/api/google/photo?name=${name}&maxWidth=1200`;
+    'https://cdn.pixabay.com/photo/2017/05/21/07/15/khonkaen-2330641_1280.jpg';
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);

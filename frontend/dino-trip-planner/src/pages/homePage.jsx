@@ -72,7 +72,7 @@ function HomePage() {
             gap-6
           ">
             {places.map(place => (
-              <PlaceCard key={place._id} place={place} />
+              <PlaceCard key={place.google_place_id} place={place} />
             ))}
           </div>
         </div>
