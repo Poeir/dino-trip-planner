@@ -1,40 +1,62 @@
+@import "tailwindcss";
+
+/* =========================
+   App Container
+========================= */
 .app-container {
-    /* Layout Settings */
-    min-height: 100vh;
-    min-height: 100dvh;
     display: flex;
     flex-direction: column;
+    min-height: 100vh; /* ⭐ สำคัญมาก */
     background-color: #f5f5f5;
-    
-    /* Font-Settings */
+
     font-family: 'Prompt', sans-serif;
     font-weight: 400;
     line-height: 1.6;
     color: #222;
+
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
+/* =========================
+   Main Layout (เต็มจอเสมอ)
+========================= */
 .main-content {
-    /* Layout Settings */
     flex: 1;
-    padding-top: 64px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
+    width: 100%;
+    padding-top: 4rem; /* เผื่อ navbar */
     overflow-y: auto;
 }
 
-@media (max-width: 768px) {
-    .main-content {
-        padding-top: 56px;
-        padding-left: 15px;
-        padding-right: 15px;
-        padding-bottom: 15px;
-    }
+/* =========================
+   Centered Content
+========================= */
+.content-wrapper {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
-@media (min-width: 769px) {
-    .main-content {
-        max-width: 480px;
-        margin: 0 auto;
-    }
+/* =========================
+   Responsive Width (บาลานซ์ desktop)
+========================= */
+@media (min-width: 640px) {
+    .content-wrapper { max-width: 640px; }
+}
+
+@media (min-width: 768px) {
+    .content-wrapper { max-width: 720px; }
+}
+
+@media (min-width: 1024px) {
+    .content-wrapper { max-width: 960px; }
+}
+
+@media (min-width: 1280px) {
+    .content-wrapper { max-width: 1140px; }
+}
+
+@media (min-width: 1536px) {
+    .content-wrapper { max-width: 1280px; }
 }
