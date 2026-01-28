@@ -6,7 +6,7 @@ const Place = require("../../models/Place");
 const { getPlaceDetail } = require("../../services/google-place-details-service");
 const { mapGooglePlaceToDB } = require("../../utils/place-mapper");
 
-router.get("/:placeId", async (req, res) => {
+router.post("/:placeId", async (req, res) => {
   const { placeId } = req.params;
 
   const cached = await Place.findOne({ google_place_id: placeId });

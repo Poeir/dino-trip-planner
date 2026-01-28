@@ -11,7 +11,7 @@ const placeRoute = require("./routes/place-routes/add-place-by-id");
 const getAllPlacesRoute = require("./routes/place-routes/get-all-places");
 const googleDetailRoute = require("./routes/google-api-routes/google_detail_route");
 const getPhotoRoute = require("./routes/utils/photo-path-route");
-
+const getOnePlaceRoute = require("./routes/place-routes/get-one-place");
 const app = express();
 
 app.use(cors({
@@ -22,13 +22,13 @@ app.use(morgan('dev'));
 app.use(express.json()); 
 
 // Routes
-app.get('/', (req, res) => res.send("Dino Trip Planner API"));
-app.use("/api/google", searchPlaceRoutes);
-app.use("/api/google", googleDetailRoute);
-app.use('/api/google', getPhotoRoute);
+app.use("/api/google/search", searchPlaceRoutes);
+app.use("/api/google/details", googleDetailRoute);
+app.use("/api/google/photo", getPhotoRoute);
+
 app.use("/api/places", placeRoute);
 app.use("/api/places", getAllPlacesRoute);
-app.use("/api/database", databaseTestRoutes);
+app.use("/api/places", getOnePlaceRoute);
 
 // Start Server
 const PORT = process.env.PORT || 3000;
