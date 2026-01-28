@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom"; // ถอด comment ออก
 import { useEffect } from "react"; // เพิ่ม useEffect
 import { get_one_place } from "../api/get-one-place"; // เพิ่ม import ฟังก์ชัน API
+import MapPreview from "../components/MapPreview";
 // Mock data
 
 function PlaceDetailPage() {
@@ -71,9 +72,11 @@ function PlaceDetailPage() {
   }
   const { core, address, media, reviews } = place;
   const photos = media?.photos ?? [];
+  const getMapUrl = (lat, lng) =>
+    'http://localhost:3000/api/google/map?lat=' + lat + '&long=' + lng;
 
-  const getPhotoUrl = (name) =>
-    'https://cdn.pixabay.com/photo/2017/05/21/07/15/khonkaen-2330641_1280.jpg';
+    const getPhotoUrl = (name) =>
+    `http://localhost:3000/api/google/photo?name=${name}&maxWidth=800`;
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -266,23 +269,10 @@ function PlaceDetailPage() {
           {/* Right Column - Additional Info */}
           <div className="space-y-6">
             {/* Map Preview */}
-            <div className="bg-white rounded-2xl shadow-md p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">ตำแหน่งที่ตั้ง</h3>
-              <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden mb-4">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  style={{ border: 0 }}
-                  src={`https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${core.location.lat},${core.location.lng}`}
-                  allowFullScreen
-                  title="Map"
-                ></iframe>
-              </div>
-              <p className="text-sm text-gray-600">
-                <strong>พิกัด:</strong> {core.location.lat.toFixed(6)}, {core.location.lng.toFixed(6)}
-              </p>
-            </div>
+            <MapPreview
+                lat={core?.location?.lat}
+                lng={core?.location?.lng}
+              />
 
             {/* Opening Hours */}
             <div className="bg-white rounded-2xl shadow-md p-6">

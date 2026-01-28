@@ -12,10 +12,10 @@ function PlaceCard({ place }) {
   const [fade, setFade] = useState(false);
   const intervalRef = useRef(null);
 
-  // const getPhotoUrl = (name) =>
-  //   `http://localhost:3000/api/google/photo?name=${name}&maxWidth=800`;
-  const getPhotoUrl = (name)=>
-    'https://cdn.pixabay.com/photo/2017/05/21/07/15/khonkaen-2330641_1280.jpg';
+  const getPhotoUrl = (name) =>
+    `http://localhost:3000/api/google/photo?name=${name}&maxWidth=800`;
+  // const getPhotoUrl = (name)=>
+  //   'https://cdn.pixabay.com/photo/2017/05/21/07/15/khonkaen-2330641_1280.jpg';
 
   // preload (เอาแค่ 5 รูปพอ)
   useEffect(() => {

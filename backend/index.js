@@ -12,6 +12,7 @@ const getAllPlacesRoute = require("./routes/place-routes/get-all-places");
 const googleDetailRoute = require("./routes/google-api-routes/google_detail_route");
 const getPhotoRoute = require("./routes/utils/photo-path-route");
 const getOnePlaceRoute = require("./routes/place-routes/get-one-place");
+const googleLatLongMapRoute = require("./routes/google-api-routes/google_lat_long_map");
 const app = express();
 
 app.use(cors({
@@ -22,9 +23,15 @@ app.use(morgan('dev'));
 app.use(express.json()); 
 
 // Routes
+app.use("/api/health", databaseTestRoutes);
+
 app.use("/api/google", searchPlaceRoutes);
 app.use("/api/google", googleDetailRoute);
 app.use("/api/google", getPhotoRoute);
+app.use("/api/google", googleLatLongMapRoute);
+
+
+
 
 app.use("/api/places", placeRoute);
 app.use("/api/places", getAllPlacesRoute);
