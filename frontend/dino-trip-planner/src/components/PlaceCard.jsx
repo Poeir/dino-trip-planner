@@ -1,23 +1,92 @@
-import './PlaceCard.css';
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./PlaceCard.css";
 
 function PlaceCard({ place }) {
-  const { core,address } = place;
-    return (
-    <div className="place-card">
-      <div className="place-image">
+  const { core, address, media } = place;
+  const photos = media?.photos ?? [];
+  const navigate = useNavigate();
+
+  const [index, setIndex] = useState(0);
+  const [fade, setFade] = useState(false);
+  const intervalRef = useRef(null);
+
+  const getPhotoUrl = (name) =>
+    `http://localhost:3000/api/google/photo?name=${name}&maxWidth=800`;
+
+  // preload (เอาแค่ 5 รูปพอ)
+  useEffect(() => {
+    photos.slice(0, 5).forEach(p => {
+      const img = new Image();
+      img.src = getPhotoUrl(p.name);
+    });
+  }, [photos]);
+
+  const startSlide = () => {
+    if (photos.length <= 1) return;
+
+    intervalRef.current = setInterval(() => {
+      setFade(true);
+      setTimeout(() => {
+        setIndex(prev => (prev + 1) % photos.length);
+        setFade(false);
+      }, 350);
+    }, 1500);
+  };
+
+  const stopSlide = () => {
+    clearInterval(intervalRef.current);
+    setIndex(0);
+    setFade(false);
+  };
+
+  const imageUrl = photos[index]
+    ? getPhotoUrl(photos[index].name)
+    : "/placeholder.jpg";
+
+  return (
+    <div
+      className="place-card"
+      onMouseEnter={startSlide}
+      onMouseLeave={stopSlide}
+      onClick={() => navigate(`/place/${place._id}`)}
+      style={{ cursor: 'pointer' }}
+    >
+      <div className="place-image fancy">
         <img
-          src="https://pukmudmuangthai.com/wp-content/uploads/2021/02/%E0%B8%82%E0%B8%AD%E0%B8%99%E0%B9%81%E0%B8%81%E0%B9%88%E0%B8%99-%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%AB%E0%B8%99%E0%B8%AD%E0%B8%87%E0%B9%81%E0%B8%A7%E0%B8%87%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%AD%E0%B8%B2%E0%B8%A3%E0%B8%B2%E0%B8%A1%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87-Medium.jpg"
+          src={imageUrl}
           alt={core.name}
+          className={`photo ${fade ? "fade" : ""}`}
         />
 
+        {/* rating */}
         <div className="rating-badge">
           ⭐ {core.rating ?? "N/A"}
+          {core.userRatingCount && (
+            <span className="rating-count">
+              ({core.userRatingCount})
+            </span>
+          )}
         </div>
+
+        {/* dot indicator */}
+        {photos.length > 1 && (
+          <div className="dots">
+            {photos.map((_, i) => (
+              <span
+                key={i}
+                className={`dot ${i === index ? "active" : ""}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="place-content">
         <h3>{core.name}</h3>
-        <p className="type">{core.primaryType}</p>
+        <p className="type">
+          {core.primaryType.replaceAll("_", " ")}
+        </p>
         <p className="location">
           📍 {address.formatted}
         </p>

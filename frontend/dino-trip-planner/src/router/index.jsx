@@ -1,11 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
 import HomePage from '../pages/homePage';
-import TripPlannerPage from '../pages/tripplannerPage';
+import TripPlannerPage from '../pages/trip-planner/tripplannerPage';
 import RecommendPage from '../pages/recommendPage';
 import LoadingPage from '../pages/loadingPage';
 import SummaryPage from '../pages/summaryPage';
 import ChatbotPage from '../pages/chatbotPage';
+import AboutPage from '../pages/aboutPage';
+import PlaceDetailPage from '../pages/placeDetailPage';
 
 const router = createBrowserRouter([
     {
@@ -17,7 +19,7 @@ const router = createBrowserRouter([
                 element: <HomePage />
             },
             {
-                path: 'trip-planner',
+                path: 'ai-trip',
                 element: <TripPlannerPage />
             },
             {
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
             {
                 path: 'chatbot',
                 element: <ChatbotPage />
+            },
+            {
+                path : 'about-khonkaen',
+                element: <AboutPage />
+            },
+            {
+                path: 'place/:id',
+                element: <PlaceDetailPage />
             }
         ]
     }
