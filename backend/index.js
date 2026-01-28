@@ -22,9 +22,9 @@ app.use(morgan('dev'));
 app.use(express.json()); 
 
 // Routes
-app.use("/api/google/search", searchPlaceRoutes);
-app.use("/api/google/details", googleDetailRoute);
-app.use("/api/google/photo", getPhotoRoute);
+app.use("/api/google", searchPlaceRoutes);
+app.use("/api/google", googleDetailRoute);
+app.use("/api/google", getPhotoRoute);
 
 app.use("/api/places", placeRoute);
 app.use("/api/places", getAllPlacesRoute);
