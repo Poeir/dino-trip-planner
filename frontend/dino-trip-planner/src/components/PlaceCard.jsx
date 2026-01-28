@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./PlaceCard.css";
 
 function PlaceCard({ place }) {
   const { core, address, media } = place;
   const photos = media?.photos ?? [];
+  const navigate = useNavigate();
 
   const [index, setIndex] = useState(0);
   const [fade, setFade] = useState(false);
@@ -47,6 +49,8 @@ function PlaceCard({ place }) {
       className="place-card"
       onMouseEnter={startSlide}
       onMouseLeave={stopSlide}
+      onClick={() => navigate(`/place/${place._id}`)}
+      style={{ cursor: 'pointer' }}
     >
       <div className="place-image fancy">
         <img
