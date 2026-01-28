@@ -73,7 +73,7 @@ function PlaceDetailPage() {
   const photos = media?.photos ?? [];
 
   const getPhotoUrl = (name) =>
-    `http://localhost:3000/api/google/photo?name=${name}&maxWidth=1200`;
+    'https://cdn.pixabay.com/photo/2017/05/21/07/15/khonkaen-2330641_1280.jpg';
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);

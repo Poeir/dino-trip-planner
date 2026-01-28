@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import TypeBadge from "./TypeBadge";
 import "./PlaceCard.css";
 
 function PlaceCard({ place }) {
@@ -11,8 +12,10 @@ function PlaceCard({ place }) {
   const [fade, setFade] = useState(false);
   const intervalRef = useRef(null);
 
-  const getPhotoUrl = (name) =>
-    `http://localhost:3000/api/google/photo?name=${name}&maxWidth=800`;
+  // const getPhotoUrl = (name) =>
+  //   `http://localhost:3000/api/google/photo?name=${name}&maxWidth=800`;
+  const getPhotoUrl = (name)=>
+    'https://cdn.pixabay.com/photo/2017/05/21/07/15/khonkaen-2330641_1280.jpg';
 
   // preload (เอาแค่ 5 รูปพอ)
   useEffect(() => {
@@ -84,9 +87,9 @@ function PlaceCard({ place }) {
 
       <div className="place-content">
         <h3>{core.name}</h3>
-        <p className="type">
-          {core.primaryType.replaceAll("_", " ")}
-        </p>
+        <div className="flex flex-wrap gap-2 mt-2">
+          <TypeBadge label={core.primaryType} />
+        </div>
         <p className="location">
           📍 {address.formatted}
         </p>
