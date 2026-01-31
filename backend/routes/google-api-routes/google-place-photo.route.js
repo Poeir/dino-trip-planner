@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { getPlacePhotoStream } = require("../../services/google-place-photo-service");
+const { getPlacePhotoStream } = require("../../services/google/place-photo.service");
 
 router.get("/photo", async (req, res) => {
   try {

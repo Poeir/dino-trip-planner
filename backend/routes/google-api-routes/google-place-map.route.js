@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getMapUrl } = require('../../services/google-place-map-service');
+const { getMapUrl } = require('../../services/google/place-map.service');
 
 router.get('/map', async (req, res) => {
     const { lat, long } = req.query;

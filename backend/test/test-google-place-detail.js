@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const {getPlaceDetail} = require("../services/google-place-details-service");
+const {getPlaceDetail} = require("../services/google/place-detail.service");
 
 (async () => {
   try {

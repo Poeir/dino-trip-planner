@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getPlaceDetail } = require('../../services/google-place-details-service');
+const { getPlaceDetail } = require('../../services/google/place-detail.service');
 
 // Route to handle Google Place Search
 router.get('/search/:placeId', async (req, res) => {

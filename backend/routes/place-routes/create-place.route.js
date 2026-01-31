@@ -3,8 +3,8 @@ const express = require("express");
 const router = express.Router();
 
 const Place = require("../../models/Place");
-const { getPlaceDetail } = require("../../services/google-place-details-service");
-const { mapGooglePlaceToDB } = require("../../utils/place-mapper");
+const { getPlaceDetail } = require("../../services/google/place-detail.service");
+const { mapGooglePlaceToDB } = require("../../utils/mapper/google-place.mapper");
 
 router.post("/:placeId", async (req, res) => {
   const { placeId } = req.params;

@@ -3,16 +3,22 @@ const express = require('express');
 const morgan = require('morgan');
 const connectDB = require('./config/db'); // Import เข้ามา
 const cors = require('cors');
+const axios = require('axios');
 
-// Route Imports
-const searchPlaceRoutes = require("./routes/google-api-routes/google_search_route");
-const databaseTestRoutes = require("./routes/health/test_database_connection");
-const placeRoute = require("./routes/place-routes/add-place-by-id");
-const getAllPlacesRoute = require("./routes/place-routes/get-all-places");
-const googleDetailRoute = require("./routes/google-api-routes/google_detail_route");
-const getPhotoRoute = require("./routes/utils/photo-path-route");
-const getOnePlaceRoute = require("./routes/place-routes/get-one-place");
-const googleLatLongMapRoute = require("./routes/google-api-routes/google_lat_long_map");
+// Google API routes
+const googleSearchRoutes = require("./routes/google-api-routes/google-place-search.route");
+const googleDetailRoutes = require("./routes/google-api-routes/google-place-detail.route");
+const googleMapRoutes = require("./routes/google-api-routes/google-place-map.route");
+const googlePhotoRoutes = require("./routes/google-api-routes/google-place-photo.route");
+
+// Health check
+const databaseTestRoutes = require("./routes/health/health-database.route");
+
+// Place routes
+const createPlaceRoute = require("./routes/place-routes/create-place.route");
+const getPlacesRoute = require("./routes/place-routes/get-places.route");
+const getPlaceByIdRoute = require("./routes/place-routes/get-place-by-id.route");
+
 const app = express();
 
 app.use(cors({
@@ -26,23 +32,42 @@ app.use(express.json());
 
 app.use("/api/health", databaseTestRoutes);
 
-app.use("/api/google", searchPlaceRoutes);
-app.use("/api/google", googleDetailRoute);
-app.use("/api/google", getPhotoRoute);
-app.use("/api/google", googleLatLongMapRoute);
+app.use("/api/google", googleSearchRoutes);
+app.use("/api/google", googleDetailRoutes);
+app.use("/api/google", googlePhotoRoutes);
+app.use("/api/google", googleMapRoutes);
 
-
-app.use("/api/places", placeRoute);
-app.use("/api/places", getAllPlacesRoute);
-app.use("/api/places", getOnePlaceRoute);
+app.use("/api/places", createPlaceRoute);
+app.use("/api/places", getPlacesRoute);
+app.use("/api/places", getPlaceByIdRoute);
 app.use("/", (req, res) => {
     res.send("Welcome to the Places API Server");
 });
 // Start Server
+
+const checkEndpoints = async () => {
+  try {
+    const res = await axios.get(`http://localhost:${PORT}/api/health`);
+    console.log("✅ Health check passed:", res.data);
+  } catch (err) {
+    console.error("❌ Health check failed:", err.message);
+  }
+};
+    
 const PORT = process.env.PORT || 3000;
 const start = async () => {
-    await connectDB(); // เรียกใช้ฟังก์ชันต่อ DB
-    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+  try {
+    await connectDB();
+    
+    const server = app.listen(PORT, async () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      await checkEndpoints();
+    });
+
+  } catch (err) {
+    console.error("❌ Server failed to start:", err);
+    process.exit(1);
+  }
 };
 
 start();

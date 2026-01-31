@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const {searchNearbyPlaces} = require("../services/google-search-service");
+const {searchNearbyPlaces} = require("../services/google/place-search.service");
 (
     async() => {
         try{
