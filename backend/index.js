@@ -23,6 +23,7 @@ app.use(morgan('dev'));
 app.use(express.json()); 
 
 // Routes
+
 app.use("/api/health", databaseTestRoutes);
 
 app.use("/api/google", searchPlaceRoutes);
@@ -31,12 +32,12 @@ app.use("/api/google", getPhotoRoute);
 app.use("/api/google", googleLatLongMapRoute);
 
 
-
-
 app.use("/api/places", placeRoute);
 app.use("/api/places", getAllPlacesRoute);
 app.use("/api/places", getOnePlaceRoute);
-
+app.use("/", (req, res) => {
+    res.send("Welcome to the Places API Server");
+});
 // Start Server
 const PORT = process.env.PORT || 3000;
 const start = async () => {

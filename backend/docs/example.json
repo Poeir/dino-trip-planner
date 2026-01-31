@@ -1,0 +1,681 @@
+{
+	"name": "places/ChIJvf-BtUeKIjERBZxGI8wFj4o",
+	"id": "ChIJvf-BtUeKIjERBZxGI8wFj4o",
+	"types": [
+		"museum",
+		"tourist_attraction",
+		"point_of_interest",
+		"establishment"
+	],
+	"nationalPhoneNumber": "043 246 170",
+	"internationalPhoneNumber": "+66 43 246 170",
+	"formattedAddress": "193 พิพิธภัณฑสถานแห่งชาติ ขอนแก่น ตำบลในเมือง เมือง ขอนแก่น 40000 ประเทศไทย",
+	"addressComponents": [
+		{
+			"longText": "193 พิพิธภัณฑสถานแห่งชาติ ขอนแก่น",
+			"languageCode": "th"
+		},
+		{
+			"longText": "ตำบลในเมือง",
+			"shortText": "ต.ในเมือง",
+			"types": [
+				"sublocality_level_1",
+				"sublocality",
+				"political"
+			],
+			"languageCode": "th"
+		},
+		{
+			"longText": "เมือง",
+			"shortText": "เมือง",
+			"types": [
+				"administrative_area_level_2",
+				"political"
+			],
+			"languageCode": "th"
+		},
+		{
+			"longText": "ขอนแก่น",
+			"shortText": "จ.ขอนแก่น",
+			"types": [
+				"administrative_area_level_1",
+				"political"
+			],
+			"languageCode": "th"
+		},
+		{
+			"longText": "ประเทศไทย",
+			"shortText": "TH",
+			"types": [
+				"country",
+				"political"
+			],
+			"languageCode": "th"
+		},
+		{
+			"longText": "40000",
+			"shortText": "40000",
+			"types": [
+				"postal_code"
+			],
+			"languageCode": "th"
+		}
+	],
+	"plusCode": {
+		"globalCode": "7P84CRWQ+FF",
+		"compoundCode": "CRWQ+FF เทศบาลนครขอนแก่น อำเภอเมืองขอนแก่น ขอนแก่น ประเทศไทย"
+	},
+	"location": {
+		"latitude": 16.446195,
+		"longitude": 102.8386278
+	},
+	"viewport": {
+		"low": {
+			"latitude": 16.444896319708498,
+			"longitude": 102.83728111970848
+		},
+		"high": {
+			"latitude": 16.447594280291504,
+			"longitude": 102.8399790802915
+		}
+	},
+	"rating": 4.2,
+	"googleMapsUri": "https://maps.google.com/?cid=9984205273226976261&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+	"websiteUri": "http://www.virtualmuseum.finearts.go.th/khonkaen/index.php/th/",
+	"regularOpeningHours": {
+		"openNow": false,
+		"periods": [
+			{
+				"open": {
+					"day": 0,
+					"hour": 9,
+					"minute": 0
+				},
+				"close": {
+					"day": 0,
+					"hour": 16,
+					"minute": 0
+				}
+			},
+			{
+				"open": {
+					"day": 3,
+					"hour": 9,
+					"minute": 0
+				},
+				"close": {
+					"day": 3,
+					"hour": 16,
+					"minute": 0
+				}
+			},
+			{
+				"open": {
+					"day": 4,
+					"hour": 9,
+					"minute": 0
+				},
+				"close": {
+					"day": 4,
+					"hour": 16,
+					"minute": 0
+				}
+			},
+			{
+				"open": {
+					"day": 5,
+					"hour": 9,
+					"minute": 0
+				},
+				"close": {
+					"day": 5,
+					"hour": 16,
+					"minute": 0
+				}
+			},
+			{
+				"open": {
+					"day": 6,
+					"hour": 9,
+					"minute": 0
+				},
+				"close": {
+					"day": 6,
+					"hour": 16,
+					"minute": 0
+				}
+			}
+		],
+		"weekdayDescriptions": [
+			"วันจันทร์: ปิดทำการ",
+			"วันอังคาร: ปิดทำการ",
+			"วันพุธ: 9:00–16:00",
+			"วันพฤหัสบดี: 9:00–16:00",
+			"วันศุกร์: 9:00–16:00",
+			"วันเสาร์: 9:00–16:00",
+			"วันอาทิตย์: 9:00–16:00"
+		],
+		"nextOpenTime": "2026-01-30T02:00:00Z"
+	},
+	"utcOffsetMinutes": 420,
+	"adrFormatAddress": "193 พิพิธภัณฑสถานแห่งชาติ ขอนแก่น <span class=\"extended-address\">ตำบลในเมือง</span> <span class=\"locality\">เมือง</span> <span class=\"region\">ขอนแก่น</span> <span class=\"postal-code\">40000</span> <span class=\"country-name\">ประเทศไทย</span>",
+	"businessStatus": "OPERATIONAL",
+	"userRatingCount": 514,
+	"iconMaskBaseUri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/museum_pinlet",
+	"iconBackgroundColor": "#13B5C7",
+	"displayName": {
+		"text": "พิพิธภัณฑสถานแห่งชาติ ขอนแก่น",
+		"languageCode": "th"
+	},
+	"primaryTypeDisplayName": {
+		"text": "พิพิธภัณฑ์",
+		"languageCode": "th"
+	},
+	"currentOpeningHours": {
+		"openNow": false,
+		"periods": [
+			{
+				"open": {
+					"day": 0,
+					"hour": 9,
+					"minute": 0,
+					"date": {
+						"year": 2026,
+						"month": 2,
+						"day": 1
+					}
+				},
+				"close": {
+					"day": 0,
+					"hour": 16,
+					"minute": 0,
+					"date": {
+						"year": 2026,
+						"month": 2,
+						"day": 1
+					}
+				}
+			},
+			{
+				"open": {
+					"day": 3,
+					"hour": 9,
+					"minute": 0,
+					"date": {
+						"year": 2026,
+						"month": 2,
+						"day": 4
+					}
+				},
+				"close": {
+					"day": 3,
+					"hour": 16,
+					"minute": 0,
+					"date": {
+						"year": 2026,
+						"month": 2,
+						"day": 4
+					}
+				}
+			},
+			{
+				"open": {
+					"day": 4,
+					"hour": 9,
+					"minute": 0,
+					"date": {
+						"year": 2026,
+						"month": 1,
+						"day": 29
+					}
+				},
+				"close": {
+					"day": 4,
+					"hour": 16,
+					"minute": 0,
+					"date": {
+						"year": 2026,
+						"month": 1,
+						"day": 29
+					}
+				}
+			},
+			{
+				"open": {
+					"day": 5,
+					"hour": 9,
+					"minute": 0,
+					"date": {
+						"year": 2026,
+						"month": 1,
+						"day": 30
+					}
+				},
+				"close": {
+					"day": 5,
+					"hour": 16,
+					"minute": 0,
+					"date": {
+						"year": 2026,
+						"month": 1,
+						"day": 30
+					}
+				}
+			},
+			{
+				"open": {
+					"day": 6,
+					"hour": 9,
+					"minute": 0,
+					"date": {
+						"year": 2026,
+						"month": 1,
+						"day": 31
+					}
+				},
+				"close": {
+					"day": 6,
+					"hour": 16,
+					"minute": 0,
+					"date": {
+						"year": 2026,
+						"month": 1,
+						"day": 31
+					}
+				}
+			}
+		],
+		"weekdayDescriptions": [
+			"วันจันทร์: ปิดทำการ",
+			"วันอังคาร: ปิดทำการ",
+			"วันพุธ: 9:00–16:00",
+			"วันพฤหัสบดี: 9:00–16:00",
+			"วันศุกร์: 9:00–16:00",
+			"วันเสาร์: 9:00–16:00",
+			"วันอาทิตย์: 9:00–16:00"
+		],
+		"nextOpenTime": "2026-01-30T02:00:00Z"
+	},
+	"primaryType": "museum",
+	"shortFormattedAddress": "193 พิพิธภัณฑสถานแห่งชาติ ขอนแก่น เมือง",
+	"editorialSummary": {
+		"text": "พิพิธภัณฑ์เล็กๆ ที่จัดแสดงประวัติศาสตร์ของภูมิภาค โดยมีทั้งประติมากรรม เครื่องปั้นดินเผา และโบราณวัตถุจากอารยธรรมในอดีต",
+		"languageCode": "th"
+	},
+	"reviews": [
+		{
+			"name": "places/ChIJvf-BtUeKIjERBZxGI8wFj4o/reviews/Ci9DQUlRQUNvZENodHljRjlvT2pOYVJ6SkliMjB6TTJSRWRHRmpVRWxRZVc5b01IYxAB",
+			"relativePublishTimeDescription": "5 เดือนที่แล้ว",
+			"rating": 5,
+			"text": {
+				"text": "จัดตั้งขึ้นเพื่อให้เป็นที่รวบรวม สงวนรักษา และจัดแสดงโบราณวัตถุ ศิลปวัตถุ ที่เป็นสมบัติทางวัฒนธรรมของชาติในเขตภาคอีสานตอนบน ซึ่งเป็นที่ที่พบโบราณสถานและโบราณวัตถุศิลปวัตถุเป็นจำนวนมาก มีส่วนจัดแสดงนิทรรศการและส่วนบริการ ดังนี้\nส่วนจัดแสดงที่ 1 สมัยก่อนประวัติศาสตร์\nส่วนจัดแสดงที่ 2 สมัยประวัติศาสตร์และวัฒนธรรมทวารวดี\nส่วนจัดแสดงที่ 3 วัฒนธรรมขอม\nส่วนจัดแสดงที่ 4 วัฒนธรรมล้านช้าง\nส่วนจัดแสดงที่ 5 สมัยรัตนโกสินทร์\nส่วนจัดแสดงที่ 6 ห้องศิลปวัฒนธรรมพื้นบ้านอีสาน",
+				"languageCode": "th"
+			},
+			"originalText": {
+				"text": "จัดตั้งขึ้นเพื่อให้เป็นที่รวบรวม สงวนรักษา และจัดแสดงโบราณวัตถุ ศิลปวัตถุ ที่เป็นสมบัติทางวัฒนธรรมของชาติในเขตภาคอีสานตอนบน ซึ่งเป็นที่ที่พบโบราณสถานและโบราณวัตถุศิลปวัตถุเป็นจำนวนมาก มีส่วนจัดแสดงนิทรรศการและส่วนบริการ ดังนี้\nส่วนจัดแสดงที่ 1 สมัยก่อนประวัติศาสตร์\nส่วนจัดแสดงที่ 2 สมัยประวัติศาสตร์และวัฒนธรรมทวารวดี\nส่วนจัดแสดงที่ 3 วัฒนธรรมขอม\nส่วนจัดแสดงที่ 4 วัฒนธรรมล้านช้าง\nส่วนจัดแสดงที่ 5 สมัยรัตนโกสินทร์\nส่วนจัดแสดงที่ 6 ห้องศิลปวัฒนธรรมพื้นบ้านอีสาน",
+				"languageCode": "th"
+			},
+			"authorAttribution": {
+				"displayName": "S M",
+				"uri": "https://www.google.com/maps/contrib/113593438615531649069/reviews",
+				"photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjX9Uo9CAZSbTsEb5SNF81ydwuqX3OgGYsLsIcI3sDX9WBw5dtc=s128-c0x00000000-cc-rp-mo-ba7"
+			},
+			"publishTime": "2025-08-15T01:27:11.876910156Z",
+			"flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT2pOYVJ6SkliMjB6TTJSRWRHRmpVRWxRZVc5b01IYxAB&d=17924085&t=1",
+			"googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2pOYVJ6SkliMjB6TTJSRWRHRmpVRWxRZVc5b01IYxAB!2m1!1s0x31228a47b581ffbd:0x8a8f05cc23469c05"
+		},
+		{
+			"name": "places/ChIJvf-BtUeKIjERBZxGI8wFj4o/reviews/ChdDSUhNMG9nS0VMalQ5UHJscTZ5S3hnRRAB",
+			"relativePublishTimeDescription": "8 เดือนที่แล้ว",
+			"rating": 5,
+			"text": {
+				"text": "ค่าเข้าชม20฿\nอาคาร2ชั้น จัดแสดงเกี่ยวกับยุคก่อนประวัติศาสตร์ ทวารวดี ขอม ตั้งเมืองขอนแก่น และชีวิตอีสาน\n\nปีนี้นิทรรศการหมุนเวียนชั้นหนึ่ง  มีเวิร์คช็อปทำยาดม(ปีก่อนเป็นโปสการ์ดภาพเขียนสี)",
+				"languageCode": "th"
+			},
+			"originalText": {
+				"text": "ค่าเข้าชม20฿\nอาคาร2ชั้น จัดแสดงเกี่ยวกับยุคก่อนประวัติศาสตร์ ทวารวดี ขอม ตั้งเมืองขอนแก่น และชีวิตอีสาน\n\nปีนี้นิทรรศการหมุนเวียนชั้นหนึ่ง  มีเวิร์คช็อปทำยาดม(ปีก่อนเป็นโปสการ์ดภาพเขียนสี)",
+				"languageCode": "th"
+			},
+			"authorAttribution": {
+				"displayName": "Antika Danchalermnon",
+				"uri": "https://www.google.com/maps/contrib/117896272395698912225/reviews",
+				"photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjU9nDlvVQPwQ7VKoMwdKbSM1Tw2QU4_Hk02MuMeL5gomeEkVwV3=s128-c0x00000000-cc-rp-mo-ba4"
+			},
+			"publishTime": "2025-05-10T07:15:21.901576Z",
+			"flagContentUri": "https://www.google.com/local/content/rap/report?postId=ChdDSUhNMG9nS0VMalQ5UHJscTZ5S3hnRRAB&d=17924085&t=1",
+			"googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VMalQ5UHJscTZ5S3hnRRAB!2m1!1s0x31228a47b581ffbd:0x8a8f05cc23469c05"
+		},
+		{
+			"name": "places/ChIJvf-BtUeKIjERBZxGI8wFj4o/reviews/ChdDSUhNMG9nS0VMYTZ3SWVldzktMTVRRRAB",
+			"relativePublishTimeDescription": "8 เดือนที่แล้ว",
+			"rating": 5,
+			"text": {
+				"text": "เจ้าหน้าที่น่ารักมากค่ะ คอยแนะนำเส้นทางที่ควรเดิน เป็นพิพิธภัณฑ์ประจำจังหวัดที่ดีกว่าที่คาดไว้เยอะเลยค่ะ มีรายละเอียด และสามารถเดินได้สนุกค่ะ ช่วงที่ไปมีส่วนจัดแสดงพิเศษให้ร่วมกิจกรรมได้ สนุกดีค่ะ",
+				"languageCode": "th"
+			},
+			"originalText": {
+				"text": "เจ้าหน้าที่น่ารักมากค่ะ คอยแนะนำเส้นทางที่ควรเดิน เป็นพิพิธภัณฑ์ประจำจังหวัดที่ดีกว่าที่คาดไว้เยอะเลยค่ะ มีรายละเอียด และสามารถเดินได้สนุกค่ะ ช่วงที่ไปมีส่วนจัดแสดงพิเศษให้ร่วมกิจกรรมได้ สนุกดีค่ะ",
+				"languageCode": "th"
+			},
+			"authorAttribution": {
+				"displayName": "Sujitra K. (Kikuza)",
+				"uri": "https://www.google.com/maps/contrib/105366434452976447749/reviews",
+				"photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWntvmkbMBBdqLahCLl7MEn_2i1M7ALuGpwg6Vj4yq8b6TuOv3xdA=s128-c0x00000000-cc-rp-mo-ba4"
+			},
+			"publishTime": "2025-05-06T15:01:49.034283Z",
+			"flagContentUri": "https://www.google.com/local/content/rap/report?postId=ChdDSUhNMG9nS0VMYTZ3SWVldzktMTVRRRAB&d=17924085&t=1",
+			"googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChdDSUhNMG9nS0VMYTZ3SWVldzktMTVRRRAB!2m1!1s0x31228a47b581ffbd:0x8a8f05cc23469c05"
+		},
+		{
+			"name": "places/ChIJvf-BtUeKIjERBZxGI8wFj4o/reviews/ChZDSUhNMG9nS0VPM3NwSW1DOXAtYVpBEAE",
+			"relativePublishTimeDescription": "8 เดือนที่แล้ว",
+			"rating": 5,
+			"text": {
+				"text": "ได้ความรู้เกี่ยวกับเมืองขอนแก่นมากขึ้น เล่าถึงความเป็นมาของเมือง วัฒนธรรม ประเพณี",
+				"languageCode": "th"
+			},
+			"originalText": {
+				"text": "ได้ความรู้เกี่ยวกับเมืองขอนแก่นมากขึ้น เล่าถึงความเป็นมาของเมือง วัฒนธรรม ประเพณี",
+				"languageCode": "th"
+			},
+			"authorAttribution": {
+				"displayName": "Ant Za",
+				"uri": "https://www.google.com/maps/contrib/100373705821551009194/reviews",
+				"photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjVvmon2qav5V_L95huJTaQ-hSsOe4W8ql9R1QT-YQ75ancIpQnA=s128-c0x00000000-cc-rp-mo-ba4"
+			},
+			"publishTime": "2025-05-06T02:08:56.795895Z",
+			"flagContentUri": "https://www.google.com/local/content/rap/report?postId=ChZDSUhNMG9nS0VPM3NwSW1DOXAtYVpBEAE&d=17924085&t=1",
+			"googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sChZDSUhNMG9nS0VPM3NwSW1DOXAtYVpBEAE!2m1!1s0x31228a47b581ffbd:0x8a8f05cc23469c05"
+		},
+		{
+			"name": "places/ChIJvf-BtUeKIjERBZxGI8wFj4o/reviews/Ci9DQUlRQUNvZENodHljRjlvT21zeGJqWmFhM0ZqUjBnd2NHcFhUbGRRVkZwemFYYxAB",
+			"relativePublishTimeDescription": "2 สัปดาห์ที่แล้ว",
+			"rating": 5,
+			"text": {
+				"text": "สวยสุดๆๆๆ",
+				"languageCode": "th"
+			},
+			"originalText": {
+				"text": "สวยสุดๆๆๆ",
+				"languageCode": "th"
+			},
+			"authorAttribution": {
+				"displayName": "Beauty. Bee",
+				"uri": "https://www.google.com/maps/contrib/102528706210639207454/reviews",
+				"photoUri": "https://lh3.googleusercontent.com/a/ACg8ocJbj6Qec_WKaWTUyApoBnCYwaLOpr-e_nVAbbb0R6qBbiSwcvw=s128-c0x00000000-cc-rp-mo-ba5"
+			},
+			"publishTime": "2026-01-15T03:30:31.393029893Z",
+			"flagContentUri": "https://www.google.com/local/content/rap/report?postId=Ci9DQUlRQUNvZENodHljRjlvT21zeGJqWmFhM0ZqUjBnd2NHcFhUbGRRVkZwemFYYxAB&d=17924085&t=1",
+			"googleMapsUri": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT21zeGJqWmFhM0ZqUjBnd2NHcFhUbGRRVkZwemFYYxAB!2m1!1s0x31228a47b581ffbd:0x8a8f05cc23469c05"
+		}
+	],
+	"photos": [
+		{
+			"name": "places/ChIJvf-BtUeKIjERBZxGI8wFj4o/photos/AcnlKN3ERLK_sTbXpb2FstAH_3N1vc5DsLpiKmlAmIlhiesrn4X5beoEijxB6__5HMrziYuhhMEL-JRPQAyqeFEuPJ8uLoZcodnV6wkMi2z9a8-jfZW9RnY5Zfq4x6EQyUufWWKQmdujlHGxKION1mDN-2KUJwk2hLHEuEAPaF17erbErBQ1MUsEpk36hiQjX2A-jOH4I-CVuOOMRuJS2eC67HQgkPLAC-adtl4O6W9bvfdxqJoZMNI8nCkDoXH3rHYwuW5mh4LKm0rQrzLKDVXI8m7WAVoX6TUcquPD4TYccOyHlQ",
+			"widthPx": 960,
+			"heightPx": 720,
+			"authorAttributions": [
+				{
+					"displayName": "พิพิธภัณฑสถานแห่งชาติ ขอนแก่น",
+					"uri": "https://maps.google.com/maps/contrib/105845953605290124113",
+					"photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWnFUqcbwHI5f33pASPOHJgJJEnju1RDF5P6eiQfnQ72K5DfvI=s100-p-k-no-mo"
+				}
+			],
+			"flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sAF1QipNGdwAYdjUaU8iT0rI2CDa9KW4XPK62YrLAEtaW&hl=th",
+			"googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sAF1QipNGdwAYdjUaU8iT0rI2CDa9KW4XPK62YrLAEtaW!2e10!4m2!3m1!1s0x31228a47b581ffbd:0x8a8f05cc23469c05"
+		},
+		{
+			"name": "places/ChIJvf-BtUeKIjERBZxGI8wFj4o/photos/AcnlKN167O6487YDjsYRP73y_p6O1blVh7PbtjmcCFRV_6oIHF0aGJPZvqRiS_57tuMar5qHzfsxYCvPAJYSgCkEP7dEnSou-6LgSLtDpyclqS5fr1xYIjVDoufIsF-rp8-8GUaNE0yh_L7Bw-xDidSWdIKHidwon9tewGUTl-rcdASxkkoHOnN5Ri_R6scm2Tv2UmHC3z-ptp0NR8KZ5Tv1mvZqZuTyFGu8TdshuPUJVun273tsozMQa0Dl0sg6aRPurCFJS5jYFWtmqDH7U_3-rTBWnY2EMNhVmAZgjyqNti6OEucH0-1-4ruZ0Cx2gKlNgvs_aFWe2to3FEzUS6pJ37rfIo4o9FEYiLa1eqJYdNxwkR1-GxA3wN5Cl-H4PbUJHvFWI5c0W6FPCzBxB-JlQOIB3aeFz6M7WAMjh4ZvtRp4WW8",
+			"widthPx": 4800,
+			"heightPx": 3200,
+			"authorAttributions": [
+				{
+					"displayName": "Tomas Struhar",
+					"uri": "https://maps.google.com/maps/contrib/115139648167404088207",
+					"photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXSQkyf8hGfbnhI5hqdh2eS1-fZmmwb27PsS76Ce_96d68jCho9=s100-p-k-no-mo"
+				}
+			],
+			"flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgIDelKWK2wE&hl=th",
+			"googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgIDelKWK2wE!2e10!4m2!3m1!1s0x31228a47b581ffbd:0x8a8f05cc23469c05"
+		},
+		{
+			"name": "places/ChIJvf-BtUeKIjERBZxGI8wFj4o/photos/AcnlKN3OXWeKPvfjgZtRgw9BESOkW8yKh3D9v54SRg-7WAeVAspL3WnKkH4ZIzdCt8-lBz9ulhvHOoz9GTQPjOTz_mRGgKWAif2SEG3J9x9UA2YViCjzNRoMBOS0p-mmCy6vR1erwOMxBpdM9bt0LSxUIQO7QK35gWhupBmDSnLTeCHJYIxD9H9GHTkIcLZcmNmcmofU0GOhw-3Ygs3jLJVDg40hU_PaR4aD4FZ9M-GYUmjO9M5UoKPDtzLXIwysLYQkLPcLj-F4ag2pMVMPkRilkhxOYuOeq-zFFeTrQZkVHNpKkGzqxOmgD75RlvMtDnuZHL8l73M0IFAzcegeinTcRfBsWZCD-a0xepAn3aW1MwXSdqU3E69GTdF91wXeS50UkXGynHhU6TmSWqOzR1BqaqvhCGR8qbTE6vuXTtJ_t91X44w",
+			"widthPx": 4032,
+			"heightPx": 3024,
+			"authorAttributions": [
+				{
+					"displayName": "Dick Westerink",
+					"uri": "https://maps.google.com/maps/contrib/110101893104253947477",
+					"photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjV1V9cGTxjnYGcV2_90bjikeJo7BwfvLZk8pPO4TeLbUNv9ubKSrg=s100-p-k-no-mo"
+				}
+			],
+			"flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICs8qyHkgE&hl=th",
+			"googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICs8qyHkgE!2e10!4m2!3m1!1s0x31228a47b581ffbd:0x8a8f05cc23469c05"
+		},
+		{
+			"name": "places/ChIJvf-BtUeKIjERBZxGI8wFj4o/photos/AcnlKN2CoCWDZJ9_wDSIwD0vgxsiKIbOw--XjwmJ5u2LCQ3qE4sUBoik6kz-4wHPRcfAa5f-1iJeg0TM-7_HhvLQ9P2qJbTbN2Zs5iMjeD0JWyqHEgwmFF3H8rqKyYsgJbhIdCiHaIdp4gYD5lsTFTx744iHn9N7rDs6Acqx7j9bc4VU76ZfItYy2lXeoEuYE_i6NXHswW0uoVtcBENSLEXB5ijGUhFI0GSOQejDfjH7a1c0GY58fP72vjIjYUeIvpyNrf0eJFqor6WEUqEIpwecjWGPtHECVJs44TnAzPuTemQUKtEU9CfjNxr7TyGaiqzLoLG1OFeNVfKwsE43akO_RX3LjXkc_JpWg5tV_y1_zcP8OElZ9dOvCGwNJ2jN-3AeSeIOk7J7t4Kbv6SOWvgpI4B9RMgRIcv_Lf-NgDtzwhnd6Ek",
+			"widthPx": 3024,
+			"heightPx": 4032,
+			"authorAttributions": [
+				{
+					"displayName": "PW",
+					"uri": "https://maps.google.com/maps/contrib/112808471558518512892",
+					"photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjXbNYoI2QLqNhyd7zu-2nBz3d3BbWtz510b5IKeiW1-1H8DZVfzUQ=s100-p-k-no-mo"
+				}
+			],
+			"flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgIDCreffrgE&hl=th",
+			"googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgIDCreffrgE!2e10!4m2!3m1!1s0x31228a47b581ffbd:0x8a8f05cc23469c05"
+		},
+		{
+			"name": "places/ChIJvf-BtUeKIjERBZxGI8wFj4o/photos/AcnlKN0ofVnqYYFVjAIS6hm14FzhO_YFEFv7tIHs8mvucbsBylJ2PuR8tAnGOzeqqrFmDMtFxmJaqN__KcYibR4QiIvxVIhF_sQOtj7h_3S80tWrYLpKRONyqtg3ZtXCokY6n5i1CNvhieJu0ro7F4EpHBZsVud699FXVkRyLM6GLpayVkKx72F81aMTlwDs7iclUeIjFj6_7s7r-CLjf-PqE6acSRwX_R1-tNi_bPaZIatLx1vUkCsyg8wvU7tK7IayfV1-EiQ1B810PehwGCo_x8vcm0HOqT2vPQU98goyOLVYW1t2hcRLEKcZQDymUgOKr_1BzpYAOHsa1fTqGTlVzF2DyxQYQhzKvsk_tTN21-ZkWOlzMrpkVPPop-9fDyhThahmtEFNVMe1walDPtTbQ07KEmw8m0zug1jlk2VjkaqRng",
+			"widthPx": 3024,
+			"heightPx": 4032,
+			"authorAttributions": [
+				{
+					"displayName": "MercedesLover29",
+					"uri": "https://maps.google.com/maps/contrib/110501993896835489410",
+					"photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjU58-GQh_AIWTbCFaCuLljMYSm9tqdwbL3rTxLURRVWKsB2Mo-p=s100-p-k-no-mo"
+				}
+			],
+			"flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgIDW9s2GcA&hl=th",
+			"googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgIDW9s2GcA!2e10!4m2!3m1!1s0x31228a47b581ffbd:0x8a8f05cc23469c05"
+		},
+		{
+			"name": "places/ChIJvf-BtUeKIjERBZxGI8wFj4o/photos/AcnlKN2QWGJGljnav8lZPZ03B2mFTQtsYndnlJ5FrFaqcI3dDBv7BeZGApwe9a6RzR0TIQTz6-60LfyoTx-ZJxdrqzDJkw3bP8DFN-HptARX67xs6bZ-xU__ej9wfNlSx0uGzCtRIWLiTLcBZlNyGx8OJniCpqRiRCi5Bkty66XPq0hw1zaSPndSxK4Hyq2xA45nqUB1X2k6ldOCBjfk18FkzErYnsLYw0W4Zhsjbtx3zQtQiCU2DyT948vUeV2khwh6EOhpApVm4HbZ6bAYFTp8fWRCNuQ9z5jrCYM2zwK7YRA9MF6-wNUxj6uz35BVwQvIX5WbFsoXs8lDmcd66p41d9Vh0xGTVH7zsitTooXaJzABWisAK9kYv_KvtqFAUEnNBN5_1CER0E5ws7QPl1wWG2id-GsGkJdfZ2XSudEO1C71gQ",
+			"widthPx": 1773,
+			"heightPx": 2364,
+			"authorAttributions": [
+				{
+					"displayName": "suchart cc",
+					"uri": "https://maps.google.com/maps/contrib/114702572733082068455",
+					"photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjV9bhLyk_zV-QNzjrrA9s-D4AfzOOwn_GjsAP3tlQzmgc83TmY58Q=s100-p-k-no-mo"
+				}
+			],
+			"flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgMCAnumONg&hl=th",
+			"googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgMCAnumONg!2e10!4m2!3m1!1s0x31228a47b581ffbd:0x8a8f05cc23469c05"
+		},
+		{
+			"name": "places/ChIJvf-BtUeKIjERBZxGI8wFj4o/photos/AcnlKN2eZv7DJkHCz74WAb089ZI3v2vSfabEr_oUh30DRe2K4gU7jcvvRRyKR24UFJzpSY24isLKw5tziH1GfOyzhEHiA0vwzr6__8Rai35kWL7qpKmz2hRBHdSmD_B1CyBLCHsfGPE2fg9Nk7ZHcEaQO8qaRVwDwhdkaK3ZC4lsbT5MSa1S7E_7XO-706aGo4WazbcacuKeoQO90THlixOcCgJyc7OaBfgcXsk6yzVv5s3StHWzgQc2XZSMmu_Xi60s4Du4Ig_TLOfqhSCV6-VyV06sK4TEkvnXv688-M-9RZ6AB3mSSenitqX0tftABN_AmyDMLKupv92bYjvA0gCwV377gNQwITj-q9BS6xvyW6WbfzRx0B_nc4iHD-oV-AgSsYRRcOHLJy9sjwDQrjGpnyDu-iLtnubmhfWSpxlaQuMXhWrc",
+			"widthPx": 2448,
+			"heightPx": 3264,
+			"authorAttributions": [
+				{
+					"displayName": "Phongchai Petsanghan",
+					"uri": "https://maps.google.com/maps/contrib/104559977259348773914",
+					"photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWwDOCps8wWIJjHaDwr2bqXEbfgTmnQv4SiUxWVp-Q8IZwIqN6srA=s100-p-k-no-mo"
+				}
+			],
+			"flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICO_MaMrwE&hl=th",
+			"googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICO_MaMrwE!2e10!4m2!3m1!1s0x31228a47b581ffbd:0x8a8f05cc23469c05"
+		},
+		{
+			"name": "places/ChIJvf-BtUeKIjERBZxGI8wFj4o/photos/AcnlKN1A1YDRT-RkqrRw-JU7kyjTKnu5xfw-TZrllX_uNNeVjS8tcimc6zIYa_nTKO6k82HPOtIaVjfrUaVe5rO-Oa4S141L1T4diReMjSLr_FbDK8D-lB_l9Ckxvp_r9gKpWWYuZL4kF2dLsjihoj_YFhzg8xfu5SpTQ7Y_a1Zzun_qVLVOw7IOLruLJ2t8wTdsTqJboL_-GMd-gSf9eLh-w-m-NwXEDa5mcO2qndQ7XrXtHOLGnqJVt1ggRKtivPfBB-SgzrLR2UX7ryC6pRL8E_JRT7dRjxwIxRbFAsf1-HLFWDeWeCbD957ZKiv19L7faj0Zjo2N_8-LNUdPGHXeSPC7_L-XhMFltZEC2CHRSzOFAXANEy1w5pL7LuOhDm1vEKyufo7Va302Pxb2B3dr2YKNOm_FEvhUUO0OWwH8CaAKnO_x",
+			"widthPx": 3024,
+			"heightPx": 4032,
+			"authorAttributions": [
+				{
+					"displayName": "Pontagorn Thongsai",
+					"uri": "https://maps.google.com/maps/contrib/103529670303759057679",
+					"photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjV6AslarkMl59JYTFhb0xejETsBH1-9yomyBsVBP-pz4-G10WVs=s100-p-k-no-mo"
+				}
+			],
+			"flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgIC-_deA8AE&hl=th",
+			"googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgIC-_deA8AE!2e10!4m2!3m1!1s0x31228a47b581ffbd:0x8a8f05cc23469c05"
+		},
+		{
+			"name": "places/ChIJvf-BtUeKIjERBZxGI8wFj4o/photos/AcnlKN3aCRvl251L4M1QUn6D-5D9rLSXcNfwPEw7LYhzp2Iji1FFlWK4nr1RoGbZwUJg_oPVgtCbn1F16ZOQCQT1-ViMxzBd5U7pn0tEqgAvLCUIEpBfbxpPx2jIk33Vt326Cm9Yuk9cx0L2drlLRvemGzfTGfR2-0Txno0BUEwhMxnjbha-f1PQFCqlVYOleOeNaTQe0V5REGi-bAGkoMX6WyCSRrS5sbrYY7MBC6viY2tK5yxYO2HcTe_TBKZjoOio6fv_jLC7z7jnkfQBi48OUwWHdgYs1LM0D3ZZ9RL4AvgIRi62ikYDBlLEjsXorIO83ACPpTs9D-s44Vt9lCcH_MNsvFAhxVMQy2eOWktBm-KSMDVlW6FMY-Zy7ZV35wgfsbYuT8sY6ei9hTn6TYdrNdWZDlQygLPVFcHv67vgbcCxV5NUdjXLwxGlLnOCybV3",
+			"widthPx": 3024,
+			"heightPx": 4032,
+			"authorAttributions": [
+				{
+					"displayName": "เดินสายกิน เดินสายเที่ยว ศราทราเวล",
+					"uri": "https://maps.google.com/maps/contrib/110633849275248824531",
+					"photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjUoEKW9RVi47m8hlNkTNQEwp6nbWoN66qO7qymojC_efEyoEX9ofg=s100-p-k-no-mo"
+				}
+			],
+			"flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIABIhD7_PFYnULxeOx15Xp62DAE&hl=th",
+			"googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIABIhD7_PFYnULxeOx15Xp62DAE!2e10!4m2!3m1!1s0x31228a47b581ffbd:0x8a8f05cc23469c05"
+		},
+		{
+			"name": "places/ChIJvf-BtUeKIjERBZxGI8wFj4o/photos/AcnlKN2j0GCoO3d-DDRwmfdmLTrlrVhiFrnkhB4_iAtjDGftfo5TLYO2iFLCiZGLU9wZ1n13jzRcImydSVkoF0IOtXBfWZ8W72Rl5W6Tk9ZxObqHFB6ZQKnLkp-PPefDmdEAAAwU-exi4wpnJawRwzZbV2Njh0xE7tyYD3CxaeVkw6-MTkRLWpo1Vs2Bw_SdZzqPk_eWS9UU50DsByep5uPWcLda0ddMgqhG4zYS9Ot06e_sLgDzJbBibdqELNo9xxMr_gwoD0od8MtaEm9yApAGhNbcwzuXUrvFnM7BthT8DUINmXPpRJXs1kxxNU8K5X63Soj3y2Vj1T9alLwYdbx6cgikHyRK1qSTpUF2lFmkCSK0PUTvNga5t4rnxyJFFVNpMbRUBbMadi9fSV9c4HL5PoXofnYkJJKafEXhFatZJGt60Q",
+			"widthPx": 4000,
+			"heightPx": 3000,
+			"authorAttributions": [
+				{
+					"displayName": "พรศักดิ์ สินสุข",
+					"uri": "https://maps.google.com/maps/contrib/100809012127901173153",
+					"photoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWMtMsKJ1ACVkPVq3o_MJ8lMTjgBpqut1I3ll9BIRi108P6cldD=s100-p-k-no-mo"
+				}
+			],
+			"flagContentUri": "https://www.google.com/local/imagery/report/?cb_client=maps_api_places.places_api&image_key=!1e10!2sCIHM0ogKEICAgICGgd6zbw&hl=th",
+			"googleMapsUri": "https://www.google.com/maps/place//data=!3m4!1e2!3m2!1sCIHM0ogKEICAgICGgd6zbw!2e10!4m2!3m1!1s0x31228a47b581ffbd:0x8a8f05cc23469c05"
+		}
+	],
+	"goodForChildren": true,
+	"restroom": true,
+	"parkingOptions": {
+		"freeParkingLot": true,
+		"paidParkingLot": false,
+		"freeStreetParking": true,
+		"paidStreetParking": false,
+		"freeGarageParking": false,
+		"paidGarageParking": false
+	},
+	"accessibilityOptions": {
+		"wheelchairAccessibleParking": true,
+		"wheelchairAccessibleEntrance": true,
+		"wheelchairAccessibleRestroom": true
+	},
+	"pureServiceAreaBusiness": false,
+	"addressDescriptor": {
+		"landmarks": [
+			{
+				"name": "places/ChIJyb5gakeKIjERzUeGKXoEU7Q",
+				"placeId": "ChIJyb5gakeKIjERzUeGKXoEU7Q",
+				"displayName": {
+					"text": "องค์การบริหารส่วนจังหวัดขอนแก่น",
+					"languageCode": "th"
+				},
+				"types": [
+					"city_hall",
+					"establishment",
+					"local_government_office",
+					"point_of_interest"
+				],
+				"straightLineDistanceMeters": 348.79605,
+				"travelDistanceMeters": 489.48148
+			},
+			{
+				"name": "places/ChIJeWqH8UaKIjERUwodO-tBvSc",
+				"placeId": "ChIJeWqH8UaKIjERUwodO-tBvSc",
+				"displayName": {
+					"text": "การประปาส่วนภูมิภาคเขต 6 ขอนแก่น",
+					"languageCode": "th"
+				},
+				"types": [
+					"establishment",
+					"point_of_interest"
+				],
+				"straightLineDistanceMeters": 224.73343,
+				"travelDistanceMeters": 301.9367
+			},
+			{
+				"name": "places/ChIJVyOknUiKIjER6iAgzEsA32c",
+				"placeId": "ChIJVyOknUiKIjER6iAgzEsA32c",
+				"displayName": {
+					"text": "จงประเสริฐอะไหล่ยนต์",
+					"languageCode": "th"
+				},
+				"types": [
+					"car_repair",
+					"establishment",
+					"point_of_interest",
+					"store"
+				],
+				"straightLineDistanceMeters": 194.21936,
+				"travelDistanceMeters": 459.63123
+			},
+			{
+				"name": "places/ChIJM71mI0aKIjERhhYysEEB1MI",
+				"placeId": "ChIJM71mI0aKIjERhhYysEEB1MI",
+				"displayName": {
+					"text": "โรงเรียนอนุบาลพงษ์ภิญโญ",
+					"languageCode": "th"
+				},
+				"types": [
+					"establishment",
+					"point_of_interest",
+					"school"
+				],
+				"straightLineDistanceMeters": 141.37363,
+				"travelDistanceMeters": 416.566
+			},
+			{
+				"name": "places/ChIJYTnTb0iKIjERdd0A8OKrnnM",
+				"placeId": "ChIJYTnTb0iKIjERdd0A8OKrnnM",
+				"displayName": {
+					"text": "วรวรรณ",
+					"languageCode": "th"
+				},
+				"types": [
+					"establishment",
+					"point_of_interest",
+					"store"
+				],
+				"straightLineDistanceMeters": 306.8382,
+				"travelDistanceMeters": 433.14597
+			}
+		],
+		"areas": [
+			{
+				"name": "places/ChIJcagw9DmKIjERwDjfyM9pBAQ",
+				"placeId": "ChIJcagw9DmKIjERwDjfyM9pBAQ",
+				"displayName": {
+					"text": "ตำบลในเมือง",
+					"languageCode": "th"
+				},
+				"containment": "WITHIN"
+			}
+		]
+	},
+	"googleMapsLinks": {
+		"directionsUri": "https://www.google.com/maps/dir//''/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x31228a47b581ffbd:0x8a8f05cc23469c05!3e0?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+		"placeUri": "https://maps.google.com/?cid=9984205273226976261&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+		"writeAReviewUri": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x31228a47b581ffbd:0x8a8f05cc23469c05!12e1?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+		"reviewsUri": "https://www.google.com/maps/place//data=!4m4!3m3!1s0x31228a47b581ffbd:0x8a8f05cc23469c05!9m1!1b1?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+		"photosUri": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x31228a47b581ffbd:0x8a8f05cc23469c05!10e5?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA"
+	},
+	"timeZone": {
+		"id": "Asia/Bangkok"
+	},
+	"postalAddress": {
+		"regionCode": "TH",
+		"languageCode": "th",
+		"postalCode": "40000",
+		"administrativeArea": "ขอนแก่น",
+		"locality": "เมือง",
+		"addressLines": [
+			"193 พิพิธภัณฑสถานแห่งชาติ ขอนแก่น"
+		]
+	}
+}

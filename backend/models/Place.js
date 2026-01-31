@@ -7,76 +7,122 @@ const PlaceSchema = new mongoose.Schema({
     index: true
   },
 
-  /* ===== Core (ใช้โชว์ทันที) ===== */
+  /* ===== Core (เดิม) ===== */
   core: {
     name: { type: String, index: true },
     primaryType: String,
     types: [String],
-
-    location: {
-      lat: Number,
-      lng: Number
-    },
-
+    location: { lat: Number, lng: Number },
     rating: Number,
     userRatingCount: Number,
-    priceLevel: Number, // 0–4
-    businessStatus: String // OPERATIONAL, CLOSED_TEMPORARILY
+    priceLevel: Number,
+    businessStatus: String
   },
 
-  /* ===== Contact & Address ===== */
+  /* ===== Contact & Address (เดิม) ===== */
   contact: {
     phone: String,
     website: String
   },
-
   address: {
     formatted: String
   },
 
-  /* ===== Opening Hours (structured) ===== */
+  /* ===== Opening Hours (เดิม) ===== */
   openingHours: {
     openNow: Boolean,
     weekdayDescriptions: [String],
-    periods: [
-      {
-        open: {
-          day: Number,
-          hour: Number,
-          minute: Number
-        },
-        close: {
-          day: Number,
-          hour: Number,
-          minute: Number
-        }
-      }
-    ],
+    periods: [{ open: Object, close: Object }],
     nextOpenTime: Date
   },
 
-  /* ===== Media ===== */
+  /* ===== Media (เดิม) ===== */
   media: {
-    photos: [
-      {
-        name: String,       // Google photo name
-        width: Number,
-        height: Number
-      }
-    ]
+    photos: [{ name: String, width: Number, height: Number }]
   },
 
-  /* ===== Reviews (optional: เก็บเฉพาะบางอัน) ===== */
-  reviews: [
-    {
-      authorName: String,
-      rating: Number,
-      text: String,
-      publishTime: Date
-    }
-  ],
+  /* ===== Reviews (เดิม) ===== */
+  reviews: [{
+    authorName: String,
+    rating: Number,
+    text: String,
+    publishTime: Date
+  }],
 
-  /* ===== Metadata ===== */
+  /* ===== 🔥 Features (ใหม่) ===== */
+  features: {
+    takeout: Boolean,
+    delivery: Boolean,
+    dineIn: Boolean,
+    curbsidePickup: Boolean,
+    reservable: Boolean,
+
+    servesBreakfast: Boolean,
+    servesLunch: Boolean,
+    servesDinner: Boolean,
+    servesBrunch: Boolean,
+    servesBeer: Boolean,
+    servesWine: Boolean,
+    servesCocktails: Boolean,
+    servesDessert: Boolean,
+    servesCoffee: Boolean,
+    servesVegetarianFood: Boolean,
+
+    outdoorSeating: Boolean,
+    liveMusic: Boolean,
+    menuForChildren: Boolean,
+    goodForChildren: Boolean,
+    goodForGroups: Boolean,
+    goodForWatchingSports: Boolean,
+
+    allowsDogs: Boolean,
+    restroom: Boolean
+  },
+
+  /* ===== 🔥 Extra Info (ใหม่) ===== */
+  extra: {
+    editorialSummary: String,
+    generativeSummary: String,
+    neighborhoodSummary: String,
+    reviewSummary: String,
+
+    paymentOptions: Object,
+    parkingOptions: Object,
+    accessibilityOptions: Object,
+
+    extra: {
+      priceRange: {
+        start: {
+          currencyCode: String,
+          units: Number
+        },
+        end: {
+          currencyCode: String,
+          units: Number
+        }
+      },
+      // field อื่นคงเดิม
+    }
+,
+    pureServiceAreaBusiness: Boolean
+  },
+
+  /* ===== Maps / Relations (ใหม่) ===== */
+  maps: {
+    googleMapsUri: String,
+    googleMapsLinks: Object
+  },
+
+  subDestinations: [String],
+  containingPlaces: [String],
+
+  ev: {
+    evChargeOptions: Object,
+    evChargeAmenitySummary: String,
+    fuelOptions: Object
+  },
+
+  /* ===== Metadata (เดิม) ===== */
   metadata: {
     lastFetchedAt: Date,
     expiresAt: Date,
@@ -85,5 +131,4 @@ const PlaceSchema = new mongoose.Schema({
   }
 
 }, { timestamps: true });
-
 module.exports = mongoose.model('Place', PlaceSchema);

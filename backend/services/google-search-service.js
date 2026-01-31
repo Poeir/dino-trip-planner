@@ -9,7 +9,7 @@ const KHON_KAEN_LNG = 102.8236;
 const searchNearbyPlaces = async (
   lat = KHON_KAEN_LAT, 
   lng = KHON_KAEN_LNG, 
-  radius = 5000
+  radius = 15000
 ) => {
   console.log(`==== Searching Nearby Tourist Spots at [${lat}, ${lng}] within ${radius}m ====`);
 
@@ -19,13 +19,7 @@ const searchNearbyPlaces = async (
       {
         // แก้ไขรายชื่อ Type ให้ตรงกับ Places API V1 Table A/B
         includedTypes: [
-          "tourist_attraction",
-          "museum",
-          "park",
-          "historical_landmark",
-          "art_gallery",
-          "market",           // ใช้แทน night_market, fresh_market
-          "shopping_mall"
+          'tourist_attraction'
         ],
         maxResultCount: 20,
         locationRestriction: {
