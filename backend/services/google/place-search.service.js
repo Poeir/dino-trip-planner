@@ -19,7 +19,9 @@ const searchNearbyPlaces = async (
       {
         // แก้ไขรายชื่อ Type ให้ตรงกับ Places API V1 Table A/B
         includedTypes: [
-          'tourist_attraction'
+          'restaurant',
+          'tourist_attraction',
+          'museum',
         ],
         maxResultCount: 20,
         locationRestriction: {

@@ -1,3 +1,5 @@
+// Place Model ใช้เก็บข้อมูลสถานที่จาก Google Places API ใน MongoDB
+
 const mongoose = require('mongoose');
 
 const PlaceSchema = new mongoose.Schema({

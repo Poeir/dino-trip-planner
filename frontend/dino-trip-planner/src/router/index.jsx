@@ -8,6 +8,7 @@ import SummaryPage from '../pages/summaryPage';
 import ChatbotPage from '../pages/chatbotPage';
 import AboutPage from '../pages/aboutPage';
 import PlaceDetailPage from '../pages/placeDetailPage';
+import ContactPage from '../pages/contactPage';
 
 const router = createBrowserRouter([
     {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
             {
                 path: 'place/:id',
                 element: <PlaceDetailPage />
+            },
+            {
+                path : '/contact',
+                element: <ContactPage />
             }
         ]
     }
