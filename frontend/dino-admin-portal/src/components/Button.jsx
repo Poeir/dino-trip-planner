@@ -24,6 +24,7 @@ export default function Button({
   fullWidth = false,
   icon,
   disabled = false,
+  as = 'button',
   className = '',
   ...props 
 }) {
@@ -31,10 +32,24 @@ export default function Button({
   const variantClasses = variants[variant] || variants.primary;
   const sizeClasses = sizes[size] || sizes.md;
   const widthClass = fullWidth ? 'w-full' : '';
+  const combinedClassName = `${baseClasses} ${variantClasses} ${sizeClasses} ${widthClass} ${className} flex items-center justify-center gap-2`;
   
+  // If rendering as anchor tag
+  if (as === 'a') {
+    return (
+      <a
+        className={combinedClassName}
+        {...props}
+      >
+        {icon && <span>{icon}</span>}
+        {children}
+      </a>
+    );
+  }
+
   return (
     <button
-      className={`${baseClasses} ${variantClasses} ${sizeClasses} ${widthClass} ${className} flex items-center justify-center gap-2`}
+      className={combinedClassName}
       disabled={disabled}
       {...props}
     >

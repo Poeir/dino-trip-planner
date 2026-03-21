@@ -22,7 +22,24 @@ const getPlaceByIdRoute = require("./routes/place-routes/get-place-by-id.route")
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    // Allow localhost on any port during development
+    if (origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
+      return callback(null, true);
+    }
+    
+    // Check for production origins in env if needed
+    const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [];
+    if (allowedOrigins.some(ao => origin === ao.trim())) {
+      return callback(null, true);
+    }
+    
+    callback(new Error('CORS not allowed'));
+  },
+  credentials: true,
 }));
 // Middleware
 app.use(morgan('dev'));
