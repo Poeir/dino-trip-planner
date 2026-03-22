@@ -22,7 +22,7 @@ class TripInput(BaseModel):
     interests: List[str]
     transport_mode: str = "car"
     trip_pace: str = "relaxed"
-    budget_level: str = "moderate"
+    budget_level: str = "standard"
     start_time: str = "09:00"
     end_time: str = "20:00"
 

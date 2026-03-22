@@ -53,9 +53,18 @@ class TripBuilderService:
                 query_str = "สถานที่ท่องเที่ยวยอดนิยม ขอนแก่น"
         print(f"🔎 [RAG] กำลังค้นหาสถานที่ที่ตรงกับ: '{query_str}'")
 
-        rag_results = self.retriever.search(query=query_str, limit=remaining_slots * 5)
+        rag_results = self.retriever.search(query=query_str, limit=remaining_slots * 10)
 
         existing_ids = {p.id for p in must_go_list}
+        
+        budget_map = {
+            "economy": [0, 1],       # ฟรี หรือ ถูก
+            "standard": [0, 1, 2],    # ถึงปานกลาง
+            "premium": [1, 2, 3],     # ถึงแพง (ไม่เอาของฟรี/ถูกเกินไป)
+            "luxury": [2, 3, 4]       # ปานกลาง ถึง หรูหราสุดๆ
+        }
+        allowed_prices = budget_map.get(user_input.budget_level, [0, 1, 2])
+
 
         for res in rag_results:
             place_id = res['id']
@@ -64,8 +73,14 @@ class TripBuilderService:
 
                 if place_data:
                     if "_id" in place_data: del place_data["_id"]
-                    interest_list.append(Location(**place_data))
-                    existing_ids.add(place_id)
+                    place_price = place_data.get('price_level', 1) # ถ้าไม่มีข้อมูลใน JSON ให้ตีเป็น 1
+                    place_types = place_data.get('types', [])
+
+                    if place_price in allowed_prices and "lodging" not in place_types:
+                        interest_list.append(Location(**place_data))
+                        existing_ids.add(place_id)
+                        if len(interest_list) >= remaining_slots:
+                            break
 
         all_candidates = must_go_list + interest_list
         return hotel_obj, all_candidates
@@ -76,9 +91,59 @@ class TripBuilderService:
         if user_input.trip_pace == "packed": w_time = 0.8
         elif user_input.trip_pace == "relaxed": w_time = 0.3
         
-        if user_input.budget_level == "save": w_cost = 0.9
-        elif user_input.budget_level == "splurge": w_cost = 0.1
+        weight_config = {
+            "economy": 0.9,   # เน้นเซฟน้ำมันให้มากที่สุด
+            "standard": 0.6,  # บาลานซ์
+            "premium": 0.3,   # ไม่ค่อยสนระยะทาง เน้นที่เที่ยวที่ชอบ
+            "luxury": 0.1     # ไม่สนระยะทางเลย จัดมาเต็มที่
+        }
+        w_cost = weight_config.get(user_input.budget_level, 0.6)
+        
         return w_time, w_cost
+    
+    def get_dynamic_instructions(self, user_input: TripInput):
+        # 🌟 1. แปลงค่า Pace เป็นคำสั่ง
+        pace_instruction = ""
+        if user_input.trip_pace == "relaxed":
+            pace_instruction = (
+                "- PACE (Relaxed): Schedule a slow-paced trip. "
+                "Leave plenty of free time between activities. "
+                "If there is a time gap > 45 mins, explicitly add '☕ พักผ่อนตามอัธยาศัย'. "
+                "Do NOT pack too many places into one day."
+            )
+        elif user_input.trip_pace == "packed":
+            pace_instruction = (
+                "- PACE (Packed): Schedule a fast-paced trip. "
+                "Maximize the number of places visited. "
+                "Minimize idle time and schedule activities back-to-back."
+            )
+
+        # 🌟 2. แปลงค่า Budget เป็นคำสั่งจัดการระยะทางและราคา
+        budget_instruction = ""
+        if user_input.budget_level == "economy":
+            budget_instruction = (
+                "- BUDGET (Economy): STRICTLY group places that are in the same area/zone together "
+                "to minimize driving distance and save fuel costs. Prioritize free or cheap places."
+            )
+        elif user_input.budget_level == "standard":
+            budget_instruction = (
+                "- BUDGET (Standard): Balance the driving distance and the quality of the places. "
+                "A moderate amount of driving is acceptable."
+            )
+        elif user_input.budget_level == "premium":
+            budget_instruction = (
+                "- BUDGET (Premium): Focus on high-quality experiences and highly-rated places. "
+                "It is okay to drive further for a better place."
+            )
+        elif user_input.budget_level == "luxury":
+            budget_instruction = (
+                "- BUDGET (Luxury): IGNORE travel distance and fuel costs entirely. "
+                "Focus ONLY on providing the most premium, high-end, and exclusive experiences, "
+                "even if they are far apart."
+            )
+            
+        return pace_instruction, budget_instruction
+
     
     def create_trip_summary(self, itinerary, total_dist, total_cost) -> TripSummary:
         day_summaries = []

@@ -83,7 +83,7 @@ class LLMTripPlanner:
 
         return {'is_open': False, 'wait_min': 0, 'status': 'Closed'}
 
-    def generate_prompt(self, user_input: TripInput) -> str:
+    def generate_prompt(self, user_input: TripInput, pace_instruction: str, budget_instruction: str) -> str:
         # ... (ส่วนนี้เหมือนเดิม ไม่ต้องแก้) ...
         places_str = ""
         for loc in self.candidates:
@@ -101,6 +101,10 @@ class LLMTripPlanner:
         - Must Go: {', '.join(user_input.must_go)}
         - Start: {user_input.start_time}, End: {user_input.end_time}
         
+        [DYNAMIC CONSTRAINTS]
+        {pace_instruction}
+        {budget_instruction}
+
         [PROVIDED DATA - CANDIDATE LOCATIONS]
         {places_str}
         
@@ -136,8 +140,8 @@ class LLMTripPlanner:
         if json_str.endswith("```"): json_str = json_str[:-3]
         return json_str.strip()
 
-    def solve_route_with_llm(self, user_input: TripInput) -> List[DailyItinerary]:
-        prompt = self.generate_prompt(user_input)
+    def solve_route_with_llm(self, user_input: TripInput, pace_instruction: str, budget_instruction: str) -> List[DailyItinerary]:
+        prompt = self.generate_prompt(user_input, pace_instruction, budget_instruction)
         model_name = self.default_model 
         
         print(f"🤖 Calling LLM: {model_name}...")
@@ -256,11 +260,34 @@ class LLMTripPlanner:
                             wait_time_min=wait_min
                         ))
                         
-                        # สะสมค่าใช้จ่ายและเวลา (สมมติค่าน้ำมัน 4 บาท/กม. + ค่าใช้จ่ายเฉลี่ย 100 บาท/ที่)
-                        day_cost += (dist * 4.0) + 100 
+                        # 1. ค่าน้ำมัน (4 บาท / กม.)
+                        fuel_cost = dist * 4.0
+                        
+                        # 2. ประเมินค่าใช้จ่ายแต่ละสถานที่
+                        place_cost = 0
+                        p_level = getattr(dest, 'price_level', None) # ลองดึง price_level
+                        
+                        if p_level is not None:
+                            # ถ้ามี price_level จาก Google Maps (0-4)
+                            price_map = {0: 0, 1: 150, 2: 400, 3: 800, 4: 1500}
+                            place_cost = price_map.get(p_level, 150)
+                        else:
+                            # ถ้าไม่มี ให้ประเมินจากประเภทสถานที่ (Fallback)
+                            types_str = " ".join(dest.types).lower()
+                            if any(t in types_str for t in ['restaurant', 'food', 'cafe']):
+                                place_cost = 250 # ค่ากินเฉลี่ย
+                            elif any(t in types_str for t in ['shopping_mall', 'night_market']):
+                                place_cost = 300 # ค่าช้อปปิ้ง/ของจุกจิก
+                            elif any(t in types_str for t in ['park', 'place_of_worship', 'museum']):
+                                place_cost = 0   # วัด สวนสาธารณะ พิพิธภัณฑ์ มักจะฟรีหรือถูกมาก
+                            else:
+                                place_cost = 100 # สถานที่อื่นๆ เหมาจ่าย 100
+                                
+                        # 3. สะสมค่าใช้จ่ายและเวลา
+                        day_cost += fuel_cost + place_cost
                         day_travel += travel_min
-                        current_loc = dest # อัปเดตจุดปัจจุบันเป็นสถานที่ล่าสุด
-                        current_dt = departure_dt # อัปเดตเวลาปัจจุบันหลังจากเที่ยวเสร็จ
+                        current_loc = dest         # อัปเดตจุดปัจจุบัน
+                        current_dt = departure_dt  # อัปเดตเวลาปัจจุบัน
 
                 # เช็คว่า ไม่ใช่วันสุดท้าย ใช่หรือไม่? (day_num < จำนวนวันทั้งหมด)
                 if day_num < user_input.trip_duration_days:
