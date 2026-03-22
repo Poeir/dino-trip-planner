@@ -1,0 +1,17 @@
+# Environments
+venv/
+.env
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# IDEs
+.vscode/
+.idea/
+
+# Data Files
+khon_kaen_places.json
+
+# ChromaDB (ถ้าใช้เก็บข้อมูล vector embeddings)
+chroma_db/
