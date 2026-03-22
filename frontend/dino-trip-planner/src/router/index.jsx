@@ -9,6 +9,8 @@ import ChatbotPage from '../pages/chatbotPage';
 import AboutPage from '../pages/aboutPage';
 import PlaceDetailPage from '../pages/placeDetailPage';
 import ContactPage from '../pages/contactPage';
+import TripLoadingPage from '../pages/trip-planner/TripLoadingPage';
+import TripResultPage from '../pages/trip-planner/TripResultPage';
 
 const router = createBrowserRouter([
     {
@@ -34,6 +36,14 @@ const router = createBrowserRouter([
             {
                 path: 'summary',
                 element: <SummaryPage />
+            },
+            {
+                path: 'trip-loading',
+                element: <TripLoadingPage />
+            },
+            {
+                path: 'trip-result',
+                element: <TripResultPage />
             },
             {
                 path: 'chatbot',
