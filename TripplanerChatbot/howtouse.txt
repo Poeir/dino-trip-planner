@@ -2,6 +2,6 @@ python -m venv venv
 
 pip install -r requirements.txt
 
-python -m scirpts.setup_vector_db
+python -m scripts.setup_vector_db
 
 uvicorn src.main:app --reload
