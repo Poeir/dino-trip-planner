@@ -8,7 +8,6 @@ export default function MainLayout() {
   const navigation = [
     { name: 'แดชบอร์ด', path: '/dashboard', icon: '📊' },
     { name: 'สถานที่', path: '/places', icon: '📍' },
-    { name: 'กิจกรรม', path: '/activities', icon: '🎯' },
     { name: 'อีเวนต์', path: '/events', icon: '🎉' },
     { name: 'โปรแกรมท่องเที่ยว', path: '/itineraries', icon: '🗺️' },
     { name: 'ตั้งค่า', path: '/setting', icon: '⚙️' },

@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const EventSchema = new mongoose.Schema({
   name: { type: String, required: true, index: true },
   // เช่น "เทศกาลไหมและพาแลงขอนแก่น 2568"
@@ -90,3 +92,5 @@ const EventSchema = new mongoose.Schema({
 // Index สำหรับ query หา Event ในช่วงเวลา
 EventSchema.index({ 'schedule.startDate': 1, 'schedule.endDate': 1 });
 EventSchema.index({ status: 1, 'schedule.startDate': 1 });
+
+module.exports = mongoose.model('Event', EventSchema);

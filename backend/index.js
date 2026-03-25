@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const connectDB = require('./config/db'); // Import เข้ามา
 const cors = require('cors');
 const axios = require('axios');
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpecs = require('./config/swagger');
 
 // Google API routes
 const googleSearchRoutes = require("./routes/google-api-routes/google-place-search.route");
@@ -18,6 +20,9 @@ const databaseTestRoutes = require("./routes/health/health-database.route");
 const createPlaceRoute = require("./routes/place-routes/create-place.route");
 const getPlacesRoute = require("./routes/place-routes/get-places.route");
 const getPlaceByIdRoute = require("./routes/place-routes/get-place-by-id.route");
+
+// Event routes
+const eventCrudRoute = require("./routes/event-routes/event-crud.route");
 
 const app = express();
 
@@ -47,6 +52,12 @@ app.use(express.json());
 
 // Routes
 
+// Swagger documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs, { 
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: "Dino Trip Planner API"
+}));
+
 app.use("/api/health", databaseTestRoutes);
 
 app.use("/api/google", googleSearchRoutes);
@@ -57,6 +68,9 @@ app.use("/api/google", googleMapRoutes);
 app.use("/api/places", createPlaceRoute);
 app.use("/api/places", getPlacesRoute);
 app.use("/api/places", getPlaceByIdRoute);
+
+app.use("/api/events", eventCrudRoute);
+
 app.use("/", (req, res) => {
     res.send("Welcome to the Places API Server");
 });
