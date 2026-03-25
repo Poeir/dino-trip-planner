@@ -28,7 +28,7 @@ class RAGChatbotService:
 
         # 2. ให้ Retriever ไปค้นหาข้อมูลสถานที่ที่เกี่ยวข้องกับคำถาม
         # ดึงมาสัก 3-5 สถานที่ที่ความหมายตรงที่สุด
-        print(f"🔎 [RAG] ค้นหาข้อมูลด้วยคีย์เวิร์ด: {search_query}")
+        print(f"[RAG] Searching with keyword: {search_query}")
         rag_results = self.retriever.search(query=search_query, limit=3)
         
         # 3. เอาข้อความที่ค้นเจอ มาร้อยเรียงเป็น Context (บริบท)

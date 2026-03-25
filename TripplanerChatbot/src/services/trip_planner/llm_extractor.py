@@ -4,10 +4,10 @@ from datetime import datetime, timedelta
 from openai import OpenAI
 from typing import List
 from src.core.config import API_KEY, BASE_URL, MODEL_NAME
-from .models import Location, TripInput, DailyItinerary, TimeSlot
+from .models import Place, TripInput, DailyItinerary, TimeSlot, CoreInfo, Location as LocModel, Contact, Address
 
 class LLMTripPlanner:
-    def __init__(self, candidates: List[Location], start_point: Location = None):
+    def __init__(self, candidates: List[Place], start_point: Place = None):
         self.candidates = candidates
         self.start_point = start_point
         self.location_map = {loc.id: loc for loc in candidates}
@@ -16,7 +16,7 @@ class LLMTripPlanner:
         self.default_model = MODEL_NAME
         self.client = OpenAI(api_key=self.api_key, base_url=self.base_url)
 
-    def calculate_distance(self, loc1: Location, loc2: Location) -> float:
+    def calculate_distance(self, loc1: Place, loc2: Place) -> float:
         R = 6371
         dlat = math.radians(loc2.latitude - loc1.latitude)
         dlon = math.radians(loc2.longitude - loc1.longitude)
@@ -24,7 +24,7 @@ class LLMTripPlanner:
         c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
         return R * c
     
-    def get_visit_duration(self, loc: Location, pace: str) -> int:
+    def get_visit_duration(self, loc: Place, pace: str) -> int:
             name_lower = loc.name.lower()
             buffet_keywords = ['หมูกระทะ', 'ปิ้งย่าง', 'บุฟเฟต์', 'สุกี้', 'ตี๋น้อย', 'buffet', 'barbecue', 'bbq']
         
@@ -53,16 +53,16 @@ class LLMTripPlanner:
                 
             return base_duration
     
-    def check_is_open(self, loc: Location, arrival_dt: datetime) -> dict:
+    def check_is_open(self, loc: Place, arrival_dt: datetime) -> dict:
         """เช็คว่าร้านเปิดไหม ณ เวลา arrival_dt"""
-        if not loc.opening_hours or 'periods' not in loc.opening_hours:
+        if not loc.opening_hours or not loc.opening_hours.periods:
             return {'is_open': True, 'wait_min': 0, 'status': 'Open (No Data)'}
 
         # Google Maps: 0=Sunday, 1=Monday... | Python: 0=Monday, 6=Sunday
         google_day = (arrival_dt.weekday() + 1) % 7
         arrival_minutes = arrival_dt.hour * 60 + arrival_dt.minute
         
-        periods = loc.opening_hours['periods']
+        periods = loc.opening_hours.periods
         today_periods = [p for p in periods if p['open']['day'] == google_day]
 
         if not today_periods:
@@ -178,7 +178,6 @@ class LLMTripPlanner:
                     loc_id = slot['place_id']
                     if loc_id in self.location_map:
                         dest = self.location_map[loc_id]
-                        dest.opening_hours = None
 
                         # คำนวณระยะทางและเวลาเดินทาง
                         dist = 0
@@ -208,14 +207,23 @@ class LLMTripPlanner:
                             
                             # ถ้ามีเวลาว่างเกิน 45 นาที ให้แทรก "เวลาพักผ่อน" ลงในตาราง
                         if gap_minutes > 45:
-                            dummy_loc = Location(
-                                id="free_time_dummy",
-                                name="☕ พักผ่อนตามอัธยาศัย / แวะเดินเล่นชิลๆ",
-                                # สมมติว่าพักผ่อนอยู่แถวๆ สถานที่ก่อนหน้า
-                                latitude=current_loc.latitude if current_loc else dest.latitude,
-                                longitude=current_loc.longitude if current_loc else dest.longitude,
-                                types=["free_time"],
-                                rating=0.0
+                            dummy_loc = Place(
+                                google_place_id="free_time_dummy",
+                                core=CoreInfo(
+                                    name="☕ พักผ่อนตามอัธยาศัย / แวะเดินเล่นชิลๆ",
+                                    location=LocModel(
+                                        lat=current_loc.latitude if current_loc else dest.latitude,
+                                        lng=current_loc.longitude if current_loc else dest.longitude
+                                    ),
+                                    types=["free_time"],
+                                    rating=0.0,
+                                    primaryType="free_time",
+                                    userRatingCount=0,
+                                    priceLevel=None,
+                                    businessStatus="OPERATIONAL"
+                                ),
+                                contact=Contact(),
+                                address=Address()
                             )
                             
                             free_departure = current_dt + timedelta(minutes=gap_minutes)
@@ -243,9 +251,6 @@ class LLMTripPlanner:
                         else:
                             wait_min = gap_minutes
 
-
-
-                        dest.opening_hours = None
                         start_activity_dt = arrival_at_door + timedelta(minutes=wait_min)
                         visit_min = self.get_visit_duration(dest, user_input.trip_pace)
                         departure_dt = start_activity_dt + timedelta(minutes=visit_min)
@@ -329,7 +334,7 @@ class LLMTripPlanner:
             print(f"❌ LLM Error: {e}")
             return []
         
-    def is_evening_place(self, loc: Location) -> bool:
+    def is_evening_place(self, loc: Place) -> bool:
         """เช็คว่าสถานที่นี้ควรไปช่วงเย็น/ค่ำหรือไม่"""
         evening_keywords = ['barbecue_restaurant', 'night_market', 'bar', 'night_club', 'pub', 'izakaya']
         name_lower = loc.name.lower()

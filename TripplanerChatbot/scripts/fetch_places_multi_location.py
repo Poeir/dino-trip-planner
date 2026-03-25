@@ -54,15 +54,7 @@ def search_nearby_places(lat, lng, location_name=""):
     
     payload = {
         "includedTypes": [
-            "tourist_attraction",
-            "restaurant",
-            "museum",
-            "cafe",
-            "park",
-            "shopping_mall",
-            "historical_landmark",
-            "buddhist_temple",
-            "art_gallery"
+            "cafe"
         ],
         "maxResultCount": 20,
         "locationRestriction": {
@@ -111,41 +103,135 @@ def get_place_detail(place_id):
 
 
 def format_place_data(place_detail):
-    """แปลงข้อมูล Google API เป็นรูปแบบ khon_kaen_places.json"""
+    """แปลงข้อมูล Google API เป็นรูปแบบ Place.js"""
     if not place_detail:
         return None
     
+    from datetime import datetime
+    
     location = place_detail.get("location", {})
-    formatted_address = place_detail.get("formattedAddress", "")
+    opening_hours = place_detail.get("regularOpeningHours", {})
     display_name = place_detail.get("displayName", {})
     
+    # Extract reviews with proper structure
+    reviews_list = []
+    for review in place_detail.get("reviews", [])[:5]:
+        reviews_list.append({
+            "authorName": review.get("authorAttributions", [{}])[0].get("displayName", ""),
+            "rating": review.get("rating", 0),
+            "text": review.get("text", {}).get("text", ""),
+            "publishTime": review.get("publishTime", None)
+        })
+    
+    # Extract features (boolean fields)
+    features = {}
+    feature_fields = [
+        "takeout", "delivery", "dineIn", "curbsidePickup", "reservable",
+        "servesBreakfast", "servesLunch", "servesDinner", "servesBrunch",
+        "servesBeer", "servesWine", "servesCocktails", "servesDessert",
+        "servesCoffee", "servesVegetarianFood", "outdoorSeating", "liveMusic",
+        "menuForChildren", "goodForChildren", "goodForGroups", "goodForWatchingSports",
+        "allowsDogs", "restroom"
+    ]
+    for field in feature_fields:
+        features[field] = place_detail.get(field, False)
+    
+    # Extract photos
+    photos = []
+    for photo in place_detail.get("photos", [])[:5]:
+        photos.append({
+            "name": photo.get("name", ""),
+            "width": photo.get("widthPx", 0),
+            "height": photo.get("heightPx", 0)
+        })
+    
     formatted_place = {
-        "id": place_detail.get("id", ""),
-        "types": place_detail.get("types", []),
-        "formattedAddress": formatted_address,
-        "location": {
-            "latitude": location.get("latitude", 0),
-            "longitude": location.get("longitude", 0),
+        "google_place_id": place_detail.get("id", ""),
+        
+        # Core information
+        "core": {
+            "name": display_name.get("text", ""),
+            "primaryType": place_detail.get("primaryType", ""),
+            "types": place_detail.get("types", []),
+            "location": {
+                "lat": location.get("latitude", 0),
+                "lng": location.get("longitude", 0),
+            },
+            "rating": place_detail.get("rating", 0),
+            "userRatingCount": place_detail.get("userRatingCount", 0),
+            "priceLevel": place_detail.get("priceLevel", None),
+            "businessStatus": place_detail.get("businessStatus", "")
         },
-        "rating": place_detail.get("rating", 0),
-        "googleMapsUri": place_detail.get("googleMapsUri", ""),
-        "websiteUri": place_detail.get("websiteUri", ""),
-        "regularOpeningHours": place_detail.get("regularOpeningHours", {}),
-        "businessStatus": place_detail.get("businessStatus", ""),
-        "userRatingCount": place_detail.get("userRatingCount", 0),
-        "displayName": display_name,
-        "primaryType": place_detail.get("primaryType", ""),
-        "reviews": place_detail.get("reviews", [])[:3],
-        "restroom": place_detail.get("restroom", False),
-        "accessibilityOptions": place_detail.get("accessibilityOptions", {}),
-        "pureServiceAreaBusiness": place_detail.get("pureServiceAreaBusiness", False),
-        "googleMapsLinks": place_detail.get("googleMapsLinks", {}),
+        
+        # Contact & Address
+        "contact": {
+            "phone": place_detail.get("internationalPhoneNumber", ""),
+            "website": place_detail.get("websiteUri", "")
+        },
+        "address": {
+            "formatted": place_detail.get("formattedAddress", "")
+        },
+        
+        # Opening Hours
+        "openingHours": {
+            "openNow": opening_hours.get("openNow", False),
+            "weekdayDescriptions": opening_hours.get("weekdayDescriptions", []),
+            "periods": opening_hours.get("periods", []),
+            "nextOpenTime": None
+        },
+        
+        # Media - Photos
+        "media": {
+            "photos": photos
+        },
+        
+        # Reviews
+        "reviews": reviews_list,
+        
+        # Features (service flags)
+        "features": features,
+        
+        # Extra information
+        "extra": {
+            "editorialSummary": place_detail.get("editorialSummary", {}).get("text", ""),
+            "generativeSummary": place_detail.get("generativeSummary", ""),
+            "neighborhoodSummary": None,
+            "reviewSummary": None,
+            "paymentOptions": place_detail.get("paymentOptions", {}),
+            "parkingOptions": place_detail.get("parkingOptions", {}),
+            "accessibilityOptions": place_detail.get("accessibilityOptions", {}),
+            "pureServiceAreaBusiness": place_detail.get("pureServiceAreaBusiness", False)
+        },
+        
+        # Maps / Relations
+        "maps": {
+            "googleMapsUri": place_detail.get("googleMapsUri", ""),
+            "googleMapsLinks": place_detail.get("googleMapsLinks", {})
+        },
+        
+        "subDestinations": place_detail.get("subDestinations", []),
+        "containingPlaces": place_detail.get("containingPlaces", []),
+        
+        # EV & Fuel
+        "ev": {
+            "evChargeOptions": place_detail.get("evChargeOptions", {}),
+            "evChargeAmenitySummary": place_detail.get("evChargeAmenitySummary", ""),
+            "fuelOptions": place_detail.get("fuelOptions", {})
+        },
+        
+        # Metadata
+        "metadata": {
+            "lastFetchedAt": datetime.now().isoformat(),
+            "expiresAt": None,
+            "fetchVersion": 1,
+            "source": "google_places"
+        }
     }
     
     return formatted_place
 
 
-def save_to_json(places_data, filename="output_places_multi.json"):
+def save_to_json(places_data, filename="output_places_multi_cafe.json"):
     """บันทึกข้อมูลลงไฟล์ JSON"""
     output_dir = Path(__file__).parent.parent / "data"
     output_dir.mkdir(exist_ok=True)

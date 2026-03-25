@@ -45,14 +45,22 @@ const mockPlaces = [
   },
 ];
 
-// Mock interests from previous selection
-const mockSelectedInterests = ["ธรรมชาติ", "คาเฟ่", "ติดแกรม"];
-
 function TripPlannerPage() {
   const navigate = useNavigate();
   const [showRecommendations, setShowRecommendations] = useState(false);
   const [selectedPlaces, setSelectedPlaces] = useState([]);
   const [autoRecommend, setAutoRecommend] = useState(false);
+
+  // Form state
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [tripPace, setTripPace] = useState("relaxed");
+  const [selectedInterests, setSelectedInterests] = useState([]);
+  const [budget, setBudget] = useState("standard");
+  const [accommodationName, setAccommodationName] = useState("");
+  const [mustGo, setMustGo] = useState([]);
+  const [startTime, setStartTime] = useState("09:00");
+  const [endTime, setEndTime] = useState("20:00");
 
   const togglePlaceSelection = (placeId) => {
     setSelectedPlaces((prev) =>
@@ -60,22 +68,55 @@ function TripPlannerPage() {
     );
   };
 
-  const handleNextClick = async () => {
-    // Collect data from the form
-    const formData = {
-      travelInfo: {}, // Will be populated from TravelInfoCard
-      preferences: mockSelectedInterests,
-      budget: {}, // Will be populated from BudgetSection
-      destination: {}, // Will be populated from DestinationSearch
-    };
+  const handleAddMustGo = () => {
+    if (mustGo.length < 5) {
+      setMustGo([...mustGo, ""]);
+    }
+  };
 
-    console.log("Sending to AI for processing:", formData);
+  const handleNextClick = () => {
+    // Validate required fields with specific error messages
+    const errors = [];
 
-    // TODO: Send formData to AI endpoint
-    // Example: POST /api/ai/recommend with formData
-    // The AI will process preferences and return similar places
+    if (!startDate || startDate.trim() === "") {
+      errors.push("❌ วันเริ่มต้นการเดินทาง");
+    }
 
-    // Once AI responds, show recommendations
+    if (!endDate || endDate.trim() === "") {
+      errors.push("❌ วันสิ้นสุดการเดินทาง");
+    }
+
+    if (selectedInterests.length === 0) {
+      errors.push("❌ ความสนใจ (เลือกอย่างน้อย 1 รายการ)");
+    }
+
+    if (!accommodationName || accommodationName.trim() === "") {
+      errors.push("❌ ชื่อที่พัก (โรงแรม)");
+    }
+
+    if (errors.length > 0) {
+      alert("⚠️ กรุณากรอกข้อมูลที่ขาดหายไป:\n\n" + errors.join("\n"));
+      return;
+    }
+
+    // Validate date range
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    if (start > end) {
+      alert("⚠️ วันสิ้นสุดต้องมากกว่าวันเริ่มต้น");
+      return;
+    }
+
+    // Calculate duration
+    const duration = Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1;
+
+    if (duration > 14) {
+      alert("⚠️ ความยาวของทริปไม่ควรเกิน 14 วัน");
+      return;
+    }
+
+    // Once validated, show recommendations
     setShowRecommendations(true);
 
     // Scroll to recommendations section
@@ -85,22 +126,29 @@ function TripPlannerPage() {
   };
 
   const handleSubmitTrip = () => {
-    // Collect all data including selected places
-    const allData = {
-      travelInfo: {},
-      preferences: mockSelectedInterests,
-      budget: {},
-      destination: {},
-      selectedPlaces: selectedPlaces,
-      autoRecommend: autoRecommend,
+    // Calculate trip duration
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const duration = Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1;
+
+    // Format the data according to API schema
+    const tripData = {
+      trip_start_date: startDate,
+      trip_duration_days: duration,
+      accommodation_name: accommodationName,
+      must_go: mustGo.filter((place) => place.trim() !== ""),
+      interests: selectedInterests,
+      transport_mode: "car",
+      trip_pace: tripPace,
+      budget_level: budget,
+      start_time: startTime,
+      end_time: endTime,
     };
 
-    console.log("Submitting complete trip data:", allData);
+    console.log("Submitting trip data:", tripData);
 
-    // TODO: Send allData to create trip endpoint
-    // Example: POST /api/trips/create with allData
-
-    navigate("/trip-loading");
+    // Navigate to loading page and pass trip data via state
+    navigate("/trip-loading", { state: { tripData } });
   };
 
   return (
@@ -112,10 +160,55 @@ function TripPlannerPage() {
           {/* SECTION 1: FORM INPUTS */}
           {!showRecommendations && (
             <>
-              <TravelInfoCard />
-              <PreferenceSection />
-              <BudgetSection />
-              <DestinationSearch />
+              <TravelInfoCard
+                startDate={startDate}
+                endDate={endDate}
+                tripPace={tripPace}
+                onStartDateChange={setStartDate}
+                onEndDateChange={setEndDate}
+                onTripPaceChange={setTripPace}
+              />
+              <PreferenceSection
+                selectedInterests={selectedInterests}
+                onInterestChange={setSelectedInterests}
+              />
+              <BudgetSection selectedBudget={budget} onBudgetChange={setBudget} />
+              <DestinationSearch
+                accommodationName={accommodationName}
+                mustGo={mustGo}
+                onAccommodationChange={setAccommodationName}
+                onMustGoChange={setMustGo}
+                onMustGoAdd={handleAddMustGo}
+              />
+
+              {/* Time Selection Card */}
+              <div className="bg-white rounded-2xl shadow-md p-5 sm:p-6 space-y-4">
+                <h2 className="font-semibold text-lg sm:text-xl text-gray-800">เวลาเดินทาง</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-xs sm:text-sm text-gray-600 font-medium block">
+                      เวลาเริ่มต้น
+                    </label>
+                    <input
+                      type="time"
+                      value={startTime}
+                      onChange={(e) => setStartTime(e.target.value)}
+                      className="w-full border border-gray-300 rounded-xl px-3 sm:px-4 py-2.5 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-green-700 focus:border-transparent transition-all"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs sm:text-sm text-gray-600 font-medium block">
+                      เวลาสิ้นสุด
+                    </label>
+                    <input
+                      type="time"
+                      value={endTime}
+                      onChange={(e) => setEndTime(e.target.value)}
+                      className="w-full border border-gray-300 rounded-xl px-3 sm:px-4 py-2.5 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-green-700 focus:border-transparent transition-all"
+                    />
+                  </div>
+                </div>
+              </div>
 
               {/* Next Button - Send to AI */}
               <div className="pt-4">
@@ -153,7 +246,7 @@ function TripPlannerPage() {
               <div className="bg-white rounded-2xl shadow-md p-6 mb-8">
                 <p className="font-semibold text-gray-800 mb-4">จากความสนใจของคุณ</p>
                 <div className="flex flex-wrap gap-3">
-                  {mockSelectedInterests.map((interest) => (
+                  {selectedInterests.map((interest) => (
                     <div
                       key={interest}
                       className="bg-green-700 text-white px-4 py-2 rounded-full text-sm font-medium"

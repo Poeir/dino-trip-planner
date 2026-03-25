@@ -1,33 +1,39 @@
 from src.core.database import find_place_by_name, find_places_by_types, find_place_by_id # <--- แก้ไข Path
 from src.services.rag.retriever import PlaceRetriever
-from .models import Location, TripInput, TripSummary, DaySummary
+from .models import Place, TripInput, TripSummary, DaySummary
 from datetime import datetime
 
 class TripBuilderService:
     def __init__(self):
         self.retriever = PlaceRetriever()
+    
     async def build_candidate_list(self, user_input: TripInput):
         # 1. หาโรงแรม
         accommodation = await find_place_by_name(user_input.accommodation_name)
         if not accommodation:
-            accommodation = {
-                "id": "hotel_dummy", 
-                "name": user_input.accommodation_name, 
-                "latitude": 16.4322, 
-                "longitude": 102.8236,
-                "types": ["lodging"],
-                "rating": 4.5
-            }
-        if "_id" in accommodation: del accommodation["_id"]
-        hotel_obj = Location(**accommodation)
+            # สร้าง dummy accommodation เป็น Place model
+            from .models import CoreInfo, Location as LocModel, Contact, Address
+            accommodation_obj = Place(
+                google_place_id="hotel_dummy",
+                core=CoreInfo(
+                    name=user_input.accommodation_name,
+                    location=LocModel(lat=16.4322, lng=102.8236),
+                    types=["lodging"],
+                    rating=4.5
+                ),
+                contact=Contact(),
+                address=Address()
+            )
+        else:
+            # ใช้ Place model โดยตรง
+            accommodation_obj = Place(**accommodation)
 
         # 2. หา Must-Go
         must_go_list = []
         for name in user_input.must_go:
             place = await find_place_by_name(name)
             if place:
-                if "_id" in place: del place["_id"]
-                must_go_list.append(Location(**place))
+                must_go_list.append(Place(**place))
 
         # 3. คำนวณ Slot ว่าง
         start_dt = datetime.strptime(user_input.start_time, "%H:%M")
@@ -72,18 +78,18 @@ class TripBuilderService:
                 place_data = await find_place_by_id(place_id)
 
                 if place_data:
-                    if "_id" in place_data: del place_data["_id"]
-                    place_price = place_data.get('price_level', 1) # ถ้าไม่มีข้อมูลใน JSON ให้ตีเป็น 1
-                    place_types = place_data.get('types', [])
+                    place_obj = Place(**place_data)
+                    place_price = place_obj.price_level or 1
+                    place_types = place_obj.types
 
                     if place_price in allowed_prices and "lodging" not in place_types:
-                        interest_list.append(Location(**place_data))
+                        interest_list.append(place_obj)
                         existing_ids.add(place_id)
                         if len(interest_list) >= remaining_slots:
                             break
 
         all_candidates = must_go_list + interest_list
-        return hotel_obj, all_candidates
+        return accommodation_obj, all_candidates
 
     def map_user_input_to_weights(self, user_input: TripInput):
         w_time = 0.5

@@ -9,7 +9,7 @@ DB_PATH = os.path.join(ROOT_DIR, 'chroma_db')
 
 class PlaceRetriever:
     def __init__(self):
-        print("⏳ กำลังเชื่อมต่อ Vector Database...")
+        print("[*] Connecting to Vector Database...")
         self.client = chromadb.PersistentClient(path=DB_PATH)
         
         # ใช้ Model ตัวเดียวกับตอนสร้าง DB

@@ -1,17 +1,40 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { createTripItinerary } from "../../api/tripplannerAPI";
 
 function TripLoadingPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const tripData = location.state?.tripData;
 
   useEffect(() => {
-    // Simulate AI processing time
-    const timer = setTimeout(() => {
-      navigate("/trip-result");
-    }, 3000);
+    const generateItinerary = async () => {
+      try {
+        if (!tripData) {
+          console.error("No trip data provided");
+          navigate("/trip-planner");
+          return;
+        }
 
-    return () => clearTimeout(timer);
-  }, [navigate]);
+        console.log("Sending trip data to API:", tripData);
+        
+        // Call the API to generate the itinerary
+        const response = await createTripItinerary(tripData);
+        
+        console.log("Received itinerary from API:", response);
+        
+        // Navigate to result page and pass the itinerary
+        navigate("/trip-result", { state: { itinerary: response } });
+      } catch (error) {
+        console.error("Error generating itinerary:", error);
+        // Show error message and redirect back
+        alert("เกิดข้อผิดพลาดในการสร้างแผนการท่องเที่ยว กรุณาลองใหม่อีกครั้ง");
+        navigate("/trip-planner");
+      }
+    };
+
+    generateItinerary();
+  }, [tripData, navigate]);
 
   return (
     <div className="relative w-full min-h-screen overflow-hidden">
