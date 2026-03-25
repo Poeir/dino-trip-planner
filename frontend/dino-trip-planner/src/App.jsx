@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
 import Footer from "./components/footer";
+import ChatWidget from "./components/ChatWidget";
 
 import "./App.css";
 
@@ -13,6 +14,9 @@ function App() {
         <Outlet />
       </main>
       <Footer />
+      
+      {/* Chat Widget */}
+      <ChatWidget />
     </div>
   );
 }

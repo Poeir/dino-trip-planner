@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
+import heroImage from "../assets/pic1.jpg";
 
 function EventsPage() {
   const [events, setEvents] = useState([]);
@@ -37,10 +38,29 @@ function EventsPage() {
   if (loading) return <div className="p-6 text-center">Loading...</div>;
 
   return (
-    <div className="py-16 bg-gray-50 min-h-screen">
-      <div className="content-wrapper">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">📅 กิจกรรมทั้งหมด</h1>
-        <p className="text-gray-600 mb-8">ค้นหาและค้นพบกิจกรรมที่ดีที่สุดในขอนแก่น</p>
+    <>
+      {/* ================= HERO ================= */}
+      <section className="relative bg-gradient-to-b from-green-700 to-green-600 text-white py-20 overflow-hidden">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-20"
+          style={{ backgroundImage: `url(${heroImage})` }}
+        />
+
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+          <h1 className="text-4xl font-bold mb-4">
+            📅 กิจกรรมและเหตุการณ์
+          </h1>
+          <p className="text-base opacity-90">
+            ค้นหาและค้นพบกิจกรรมที่สุดเพศสร้างในขอนแก่น
+          </p>
+        </div>
+      </section>
+
+      {/* ================= CONTENT SECTION ================= */}
+      <section className="bg-white py-16">
+        <div className="content-wrapper">
 
         {/* Filter Section */}
         <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
@@ -50,7 +70,7 @@ function EventsPage() {
               onClick={() => setSelectedCategory("all")}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 selectedCategory === "all"
-                  ? "bg-blue-600 text-white shadow-md"
+                  ? "bg-green-600 text-white shadow-md"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
@@ -62,7 +82,7 @@ function EventsPage() {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   selectedCategory === category
-                    ? "bg-blue-600 text-white shadow-md"
+                    ? "bg-green-600 text-white shadow-md"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
@@ -105,12 +125,9 @@ function EventsPage() {
           </div>
         )}
 
-        {/* Results Count */}
-        <div className="mt-8 text-center text-gray-600">
-          แสดง {filteredEvents.length} จาก {events.length} กิจกรรม
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }
 
