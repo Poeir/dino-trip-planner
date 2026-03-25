@@ -1,22 +1,27 @@
 import { useEffect, useState } from "react";
 import PlaceCard from "../components/PlaceCard";
+import EventCard from "../components/EventCard";
 import heroImage from "../assets/pic1.jpg";
 
 function HomePage() {
   const [places, setPlaces] = useState([]);
+  const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState("all");
   const [availableTypes, setAvailableTypes] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/places/")
-      .then(res => res.json())
-      .then(data => {
-        setPlaces(data);
+    Promise.all([
+      fetch("http://localhost:3000/api/places/").then(res => res.json()),
+      fetch("http://localhost:3000/api/events/").then(res => res.json())
+    ])
+      .then(([placesData, eventsData]) => {
+        setPlaces(placesData);
+        setEvents(eventsData.data || eventsData);
         
         // Extract unique types from places
-        const types = [...new Set(data.map(place => place.core.primaryType))];
+        const types = [...new Set(placesData.map(place => place.core.primaryType))];
         setAvailableTypes(types.sort());
         
         setLoading(false);
@@ -33,6 +38,9 @@ function HomePage() {
     const matchesType = selectedType === "all" || place.core.primaryType === selectedType;
     return matchesSearch && matchesType;
   });
+
+  // Split events into featured and non-featured
+  const featuredEvents = events.filter(event => event.metadata?.isFeatured);
 
   if (loading) return <div className="p-6">Loading...</div>;
 
@@ -77,8 +85,27 @@ function HomePage() {
   </div>
 </section>
 
+      {/* ================= EVENTS FEATURED ================= */}
+      {featuredEvents.length > 0 && (
+        <section className="py-8 bg-gradient-to-b from-red-50 to-white">
+          <div className="content-wrapper">
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">กิจกรรมสุดพิเศษในขอนแก่น!</h2>
+            
+            <div className="overflow-x-auto pb-2 -mx-4 px-4">
+              <div className="flex gap-4 min-w-max">
+                {featuredEvents.map(event => (
+                  <div key={event._id} style={{ width: "100%", maxWidth: "600px", minWidth: "500px" }}>
+                    <EventCard event={event} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ================= CONTENT ================= */}
-      <section className="-mt-16 pb-16">
+      <section className="pb-16 bg-white">
         <div className="content-wrapper">
           {/* Filter Section */}
           <div className="bg-white rounded-xl shadow-lg p-6 mb-8">

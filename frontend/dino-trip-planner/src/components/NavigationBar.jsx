@@ -25,6 +25,15 @@ function NavigationBar() {
                     </NavLink>
 
                     <NavLink
+                        to="/events"
+                        className={({ isActive }) =>
+                            isActive ? "nav-link active" : "nav-link"
+                        }
+                    >
+                        อีเวนต์
+                    </NavLink>
+
+                    <NavLink
                         to="/ai-trip"
                         className={({ isActive }) =>
                             isActive
@@ -80,6 +89,7 @@ function NavigationBar() {
                 <div className="nav-dropdown">
                     {[
                         { to: "/", label: "หน้าแรก" },
+                        { to: "/events", label: "📅 กิจกรรม" },
                         { to: "/about-khonkaen", label: "เกี่ยวกับขอนแก่น" },
                         { to: "/contact", label: "ติดต่อ-สอบถาม" }
                     ].map(item => (

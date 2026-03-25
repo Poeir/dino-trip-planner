@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
 import HomePage from '../pages/homePage';
+import EventsPage from '../pages/eventsPage';
 import TripPlannerPage from '../pages/trip-planner/tripplannerPage';
 import RecommendPage from '../pages/recommendPage';
 import LoadingPage from '../pages/loadingPage';
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <HomePage />
+            },
+            {
+                path: 'events',
+                element: <EventsPage />
             },
             {
                 path: 'ai-trip',
