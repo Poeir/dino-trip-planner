@@ -2,6 +2,8 @@ python -m venv venv
 
 pip install -r requirements.txt
 
+python scripts/seed_all_places.py
+
 python -m scripts.setup_vector_db
 
 uvicorn src.main:app --reload
